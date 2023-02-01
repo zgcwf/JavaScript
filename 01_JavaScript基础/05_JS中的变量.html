@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 变量的声明
+      // 2. 变量的赋值
+      var currentTime = "16:00";
+
+      // 3. 上述是声明时直接赋值, 可以先声明后赋值
+      var currentTime; // 小驼峰
+      currentTime = "16:02";
+      currentTime = "17:32";
+
+      // 4. 可以同时声明多个变量
+      var name, age, sex;
+      name = "zgc";
+      age = 24;
+      sex = "男";
+
+      // 5. 可以同时声明并赋值多个变量
+      var name = "zgc", age = 18;
+
+      console.log(currentTime, name, age, sex); // 17:32 zgc 18 男
+
+
+    // 命名规范 :
+      /*
+      - 第一个字符必须是一个字母/下划线(_)/美元符号($)
+      - 后续其他符号可以是字母/下划线(_)/美元符号($)/数字
+      - 不能用关键字和保留字命名
+      - 关键字: function/class
+      - 保留字: 还没有变成关键字, 但未来可能变成关键字的, 如:interface
+      - 变量严格区分大小写
+      - 变量由多个单词组成使用小驼峰标识
+      - 等号两边最好加上一个空格
+      - 语句后面可加分号, 也可不加
+      - 命名注意语义化表达, 见名知意
+      */
+
+    // 注意事项 :
+      /*
+      - 一个变量未声明直接使用的话会报错
+      - 一个变量有声明但没有赋值, 那么默认是undefined
+      - 如果没有使用var声明变量也可以, 但是不推荐, 会被挂载到全局(window)对象中
+      */
+
+
+    </script>
+  </body>
+</html>
