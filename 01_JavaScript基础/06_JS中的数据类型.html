@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var info = "zgc"; // string
+      var info = 18; // number
+
+      var info = {
+        a: "zgc",
+        b: 18,
+      }; // object
+
+      function info(params) {
+        console.log(params);
+      } // function
+
+      console.log(typeof info);
+      // 两种用法相等, ()是将括号内的内容看作是一个整体
+      console.log(typeof info);
+
+      /*
+       number
+      */
+      var num = 1;
+      var num = Infinity; // 表示无穷大
+      var num = NaN; // not a number 表示计算错误 ,如: 3 * 'abc'\
+
+      var num = 100; // 十进制
+      var num = 0x100; // 十六进制
+      var num = 0o100; // 八进制
+      var num = 0b100; // 二进制
+
+      // 数字可以表示的最大/最小值
+      var max = Number.MAX_VALUE;
+      var min = Number.MIN_VALUE; // 小于这个数字会被转化为 0
+
+      // isNaN, 用来判断一个值是否为NaN
+      console.log(isNaN(1)); // false
+      console.log(isNaN(NaN)); // true
+
+      /*
+       string
+      */
+      var age =18
+      var name = "zgc"; // 双引号
+      var name = 'zgc' // 单引号
+      var name = `zgc, ${age}` // 反引号, 可以拼接变量 zgc, 18
+
+      // 前后的引号类型必须一致
+      var name1 = 'my name is "zgc"' // my name is "zgc"  如果字符串里面本身包含着双引号, 可以使用单引号
+      var name2 = "my name is 'zgc'" // my name is 'zgc'  如果字符串里面本身包含着单引号, 可以使用双引号
+
+      // 字符串转义, 将一些特殊功能的字符通过转义字符的形式放入字符串中
+      // 单引号转义字符: \' 双引号转义字符: \" 反斜杠: \\  换行: \n 回车: \r 制表符: \t 退格符: \b
+      var name3 = 'my name \' is "zgc"' // my name ' is "zgc"   
+
+      // 获取字符串长度
+      var massage = 'Hello World'
+      console.log(massage.length);
+
+      // 字符串拼接
+      var name =' zgc'
+      var info = 'my name is'
+
+      var message = `${info}${name}` // my name is zgc
+      var message = info + name  // my name is zgc
+
+      /*
+       boolean
+      */
+      // 布尔类型只有true\false两种值  
+      var isLogin = true
+      var isAdmin = false
+
+      /*
+       undefiner
+      */
+      // 一个变量初始化时没有赋值, 则默认为undefined
+      var keyword
+      console.log(keyword);  // undefined
+
+
+
+       /*
+       object 复杂类型/引用类型
+      */  
+      // 对象的基本使用   
+      var user = {
+        name: 'zgc',
+        age: 21,
+        sex: '男'
+      }
+
+      // 获取到对象内的某个属性
+      console.log(user.sex);
+
+      /*
+       null
+      */     
+
+      var age = 0
+      var message = ''
+      var isOpen = false
+      if(age) {
+        // age/message/isOpen等原始类型的初始化值在分支语句中使用被转为布尔类型false
+        console.log('使用上述三个变量进行判断时,语句不会执行');
+      }
+
+      var book = {}
+      if(book) { // true       
+        // 当对一个对象类型进行初始化时, 不建议初始化为{}, 而建议初始化为null
+        // 如果book为null的话会在分支语句中被转换为布尔值false,语句不会执行
+        console.log('使用上述变量进行判断时,语句会执行');
+      }
+
+      console.log(typeof null); // object
+
+    </script>
+  </body>
+</html>
