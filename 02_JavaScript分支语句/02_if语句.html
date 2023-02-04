@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var score = 70;
+      if (score > 60) {
+        console.log("去游乐场"); // 执行
+      }
+
+      if (score > 90) {
+        console.log("买iPhone手机");
+      } else {
+        console.log("不买iPhone手机"); // 执行
+      }
+
+      if (score > 90) {
+        console.log("买iPhone手机");
+      } else if (score > 80) {
+        console.log("买华为手机");
+      } else {
+        // 当所有条件都不成立时执行
+        console.log("买小米手机"); //执行
+      }
+
+      // 补充1: 如果代码块中只有一行代码, 那么{}可以省略
+      if (score > 60) console.log("去游乐场"); // 执行
+
+      // 补充2: if()内的条件判断会隐式的转换为布尔类型
+      // NaN, 0, null, undefined, ''都会被转为false, 其他值会被转为true
+      if (!0) console.log("非0为true, 执行");
+    </script>
+  </body>
+</html>
