@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 算数运算符
+      console.log(5 * 2); // 10
+      console.log(5 / 2); // 2.5
+      console.log(5 % 2); // 1
+      console.log(2 ** 9); // 512
+      console.log(Math.pow(2, 9)); // 512 , Math.pow()等同于 **
+
+      // 自增/自减
+      // 自增/自减只能用在变量身上, 不能 5++ 这样写
+      var index = 5;
+      index++;
+      console.log(index); // 6
+      index--;
+      console.log(index); // 5
+
+      // 自增/自减的位置
+      // ++x, 先自增完成再被使用, x++, 先使用再自增
+      var index = 5;
+      ++index;
+      console.log(index); // 6
+      --index;
+      console.log(index); // 5
+
+      var index = 5;
+      // console.log(index++); // 5
+      console.log(++index); // 6
+
+      var index = 5;
+      // var result = 100 + index++;
+      // console.log(result); // 105
+
+      // var result = 100 + ++index;
+      // console.log(result); // 106
+
+      // console.log(100 + ++index); // 106
+      console.log(100 + index++); // 105
+
+      // 赋值运算符
+      var x = 1;
+
+      // 链式赋值
+      // 从右往左进行计算
+      // var x = y = z = 2 + 2 等于下方写法
+      var x = (y = z = 2 + 2);
+      console.log(x, y, z); // 4 4 4
+
+      var num = 5;
+      console.log((num **= 2)); // 25
+
+      // 比较运算符
+      // 比较运算符得到的结果都是布尔类型
+      var num1 = 20
+      var num2 = 30
+      var result = num1 > num2
+      console.log(result); // false
+
+      // == 与 ===
+      // ==运算符, 在类型不相同的情况下, 会将运算元素先转换成number值, 在进行比较
+      var num1 = ''
+      var num2 = 0
+      console.log(num1 == num2); // true
+
+      // ===
+      // 在类型不相同的情况下直接返回false
+      var num1 = ''
+      var num2 = 0
+      console.log(num1 === num2); // false
+    </script>
+  </body>
+</html>
