@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // break: 直接跳出循环, 不再执行循环体内的代码, 但如果循环在函数中, 且函数内(循环外)有其他语句, 其他语句会执行
+      const users = ["a", "b", "c", "d"];
+
+      for (let i = 0; i < users.length; i++) {
+        console.log(users[i]);
+        if (users[i] === "c") break;
+        console.log("结束");
+      } // a 结束 b 结束 c
+
+      // continue: 跳过本次循环, 循环内continue后的代码都不会执行, 执行下一次循环
+      const nums = ["1", "2", "3", "4"];
+
+      for (let i = 0; i < nums.length; i++) {
+        console.log(nums[i]);
+        if (nums[i] === "2") continue;
+        console.log("结束");
+      } // 1 结束 2 3 结束 4 结束
+
+      // return: 直接跳出当前的方法(函数), 返回到该调用的方法的语句处, 继续执行. 即函数内部(方法外)return后面的语句也不会再执行
+    </script>
+  </body>
+</html>
