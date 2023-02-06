@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // for(begin; condition; step){
+      //   循环代码块
+      // }
+      // begin: 今日循环时执行, 只执行一次
+      // condition: 每次循环之前判断, 如果条件成立, 执行代码块
+      // step: 每次循环代码块执行完成之后执行
+      for (let i = 0; i < 3; i++) {
+        console.log(i);
+      } // 0 1 2
+
+      // 循环的嵌套
+      for (let i = 0; i < 2; i++) {
+        console.log("开始");
+        for (let j = 0; j < 2; j++) {
+          console.log("a");
+        }
+        console.log("结束");
+      } // 开始 a a 结束 开始 a a 结束
+
+      // 案例一: 在页面中打印心型
+      for (let i = 0; i < 6; i++) {
+        document.write("<div>♥ ♥ ♥ ♥ ♥ ♥</div>");
+      }
+
+      document.write("-------------");
+
+      // 案例二: 打印心型强化版
+      for (let i = 0; i < 6; i++) {
+        document.write("<div>");
+        for (let j = 0; j < 6; j++) {
+          document.write(" ♥ ");
+        }
+        document.write("</div>");
+      }
+
+      document.write("-------------");
+
+      // 案例三: 在页面中打印心型三角
+      // 1:
+      var k = 0;
+      for (let i = 0; i < 6; i++) {
+        k++;
+        document.write("<div>");
+        for (let j = 0; j < k; j++) {
+          document.write(" ♥ ");
+        }
+        document.write("</div>");
+      }
+
+      document.write("-------------");
+
+      // 2:
+      for (let i = 0; i < 6; i++) {
+        k++;
+        document.write("<div>");
+        for (let j = 0; j < i + 1; j++) {
+          document.write(" ♥ ");
+        }
+        document.write("</div>");
+      }
+    </script>
+  </body>
+</html>
