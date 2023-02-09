@@ -14,10 +14,10 @@
 
       function formatCount(count) {
         var result = 0;
-        if (count > 10_0000_0000) {
+        if (count >= 10_0000_0000) {
           // _: es6语法糖, 无实际作用, 只是让数字更加直观, 可以加在数字的任何位置
           result = Math.floor(count / 1_0000_0000) + "亿";
-        } else if (count > 10_0000) {
+        } else if (count >= 10_0000) {
           result = Math.floor(count / 1_0000) + "万";
         } else {
           result = count;
