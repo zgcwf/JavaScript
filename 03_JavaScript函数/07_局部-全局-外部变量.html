@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 全局变量: 在全局定义一个变量, 那么这个变量可以在定义之后的任何范围内被访问到, 那么这个变量就称之为是一个全局变量
+      var message = "Hello World";
+      if (true) {
+        console.log(message); // Hello World
+      }
+      function foo() {
+        // 2. 局部变量: 在函数内部定义的变量, 只有在函数内部才能进行访问, 称之为局部变量
+        var nickname = "zgc";
+        console.log("foo", message); // foo Hello World
+        console.log("foo", nickname); // foo zgc
+        function bar() {
+          // 3. 外部变量: 在函数内部去访问函数之外的变量, 称之为外部变量
+          console.log("bar", message); // bar Hello World
+          console.log("bar", nickname); // bar zgc
+        }
+        bar();
+      }
+      foo();
+      // console.log("foo", nickname); // nickname is not defined
+
+      // 4. 变量的访问顺序
+      // 在函数内部访问变量, 先在自己的内部寻找, 如果没有找到就往上层作用域寻找, 一直到window对象都没有找到的话就报错
+      var info = "wlc";
+
+      function name() {
+        var info = "zgc";
+
+        function bar() {
+          // var info = "wf";
+          console.log("访问顺序", info);
+        }
+        bar();
+      }
+      name(); //访问顺序 zgc
+    </script>
+  </body>
+</html>
