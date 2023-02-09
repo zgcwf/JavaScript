@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var count1 = 13687; // 13687
+      var count2 = 5433332; // 543万
+      var count3 = 8766633333; // 87亿
+
+      function formatCount(count) {
+        var result = 0;
+        if (count > 10_0000_0000) {
+          // _: es6语法糖, 无实际作用, 只是让数字更加直观, 可以加在数字的任何位置
+          result = Math.floor(count / 1_0000_0000) + "亿";
+        } else if (count > 10_0000) {
+          result = Math.floor(count / 1_0000) + "万";
+        } else {
+          result = count;
+        }
+        return result;
+      }
+
+      var result1 = formatCount(count1);
+      console.log(result1);
+
+      var result2 = formatCount(count2);
+      console.log(result2);
+
+      var result3 = formatCount(count3);
+      console.log(result3);
+    </script>
+  </body>
+</html>
