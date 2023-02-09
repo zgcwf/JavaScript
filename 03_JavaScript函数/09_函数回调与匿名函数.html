@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo(fn) {
+        // 回调函数: 通过fn调用bar函数的过程, 称之为函数的回调
+        fn();
+      }
+
+      function bar() {
+        console.log("bar");
+      }
+      bar(); // 函数的调用
+      foo(bar);
+
+      // 案例:
+      function request(url, callback) {
+        // .....
+        var list = ["a", "b"];
+        callback(list);
+      }
+
+      // function getList(list) {
+      //   console.log(list);
+      // }
+
+      // request("www", getList);
+
+      // 匿名函数写法:
+      request("www", function (res) {
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>
