@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 函数调用其他函数
+      function bar() {
+        console.log("bar函数执行");
+      }
+
+      function foo() {
+        console.log("top");
+        console.log("foo函数执行");
+        bar();
+        console.log("bottom");
+      }
+
+      foo();
+      // 结果:
+      // top;
+      // foo函数执行;
+      // bar函数执行;
+      // bottom;
+
+      // 2. 函数调用自己, 即递归
+      // 递归必须要有结束条件, 否则会产生无限调用, 造成bug
+
+      // 3. 案例: 封装一个函数, 函数可以实现x的n次方
+      // 方法1: 循环实现
+      function pow2(x, n) {
+        if (n === 0) return 1;
+        var result = 1;
+        for (var i = 0; i < n; i++) {
+          result *= x;
+        }
+        return result;
+      }
+
+      console.log(pow2(5, 3)); // 125
+
+      // 方法2: 递归实现(必须有一个结束条件)
+      // 递归的性能不如for循环, 但写出来的代码简洁
+      function pow3(x, n) {
+        if (n === 0) return 1;
+        if (n === 1) return x;
+        return x * pow3(x, n - 1);
+      }
+
+      console.log(pow3(5, 3)); // 125
+    </script>
+  </body>
+</html>
