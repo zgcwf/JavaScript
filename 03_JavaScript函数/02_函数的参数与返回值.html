@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 函数的参数
+      function sayHello(name, age) {
+        // name, age: 形参, parmaters
+        console.log(`Hello, my name is ${name}, ${age} yaers old`);
+      }
+
+      sayHello("zgc", 18); // "zgc", 18: 实参, arguments
+
+      // 2. 函数的返回值
+      // var 变量 = 函数名() 函数执行后会返回一个值, 使用变量来进行接收
+      // 可以使用return关键字来返回结果
+      // 一旦函数中执行return语句, 那么当前函数就会被终止
+      // 函数都是有返回值的, 如果没有使用return语句, 那么函数有默认的返回值`undefined`
+      // 如果使用return语句, 但是return后面没有任何值, 那么函数的返回值也是undefined
+      function foo(name) {
+        return name === "zgc";
+        console.log("这句不会执行");
+      }
+      var bar = foo("zgc");
+      console.log(bar); // true
+    </script>
+  </body>
+</html>
