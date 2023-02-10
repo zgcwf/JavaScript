@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var info = {
+        name: "zgc",
+        age: 18,
+        height: 1.88,
+      };
+
+      // Object.keys(): 拿到对象的所有属性名, 返回一个由属性名组成的数组
+
+      // 1. for
+      const arr = Object.keys(info);
+      console.log(arr); // ['name', 'age', 'height']
+
+      for (var i = 0; i < arr.length; i++) {
+        var value = info[arr[i]];
+        console.log(value); // zgc 18 1.88
+      }
+
+      console.log("---------------------------");
+
+      // 2. for in
+      for (var key in info) {
+        console.log(key);
+        console.log(info[key]);
+      }
+      // name;
+      // zgc;
+      // age;
+      // 18;
+      // height;
+      // 1.88;
+
+      // 3. for of: 默认情况下是不能遍历对象的
+      for (var key of info) {
+        //  报错: info is not iterable
+      }
+    </script>
+  </body>
+</html>
