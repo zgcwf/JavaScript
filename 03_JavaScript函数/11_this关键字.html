@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 函数调用
+      function foo() {
+        console.log(this === window); //true
+      }
+      foo();
+
+      // 2. 方法调用
+      var obj = {
+        name: "zgc",
+        running: function () {
+          // 这里的上级作用域是window, 对象是数据类型, 不是代码块, 没有作用域
+          console.log(this);
+        },
+      };
+
+      obj.running(); //obj对象
+
+      var fn = obj.running;
+      fn(); // window对象
+
+      function bar() {
+        console.log(this);
+      }
+      var baz = {
+        name: "wf",
+        bar: bar,
+      };
+      baz.bar(); // baz对象
+    </script>
+  </body>
+</html>
