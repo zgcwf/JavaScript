@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 对象的基本结构
+      var person = {
+        name: "zgc",
+        age: 18,
+        eat: function () {
+          console.log("eating");
+        },
+        // 这种情况下需要引号
+        "my friend": "wf",
+      };
+      console.log(person);
+
+      // 2. 对象的常见操作
+
+      // (1) 对象的创建方式:
+      // 方式1:字面量创建
+      var obj1 = {
+        name: "zgc",
+        age: 10,
+        running: function () {
+          console.log("running");
+        },
+      };
+
+      // 方式2: new Object
+      var obj2 = new Object();
+
+      // 方式3: new 其他类
+      function Person() {}
+      var obj3 = new Person();
+
+      // (2) 对象的增删改查
+      // 查询对象属性
+      console.log(obj1.age, obj1.name); // 10 'zgc'
+      obj1.running(); // running
+
+      // 修改对象属性
+      person.age = 40;
+      console.log(person.age); // 40
+
+      // 添加对象属性
+      obj2.name = "zgc";
+      obj2.study = function () {
+        console.log("study");
+      };
+      console.log(obj2);
+      obj2.study(); // study
+
+      // 删除对象属性
+      // delete操作符
+      delete person.name;
+      console.log(person);
+
+      // 3. 方括号的使用
+      // 点符号要求key是有效的变量标识符,不能包含空格, 不能以数字开头, 也不能包含某些特殊字符, 这个时候我们可以使用[]
+
+      var message = "Hello World";
+      var info = {
+        name: "zgc",
+        age: 29,
+        "my friend": "wf",
+        "paly games": function () {
+          console.log("games");
+        },
+        [message]: "你好, 世界",
+      };
+
+      console.log(info.name === info["name"]); //true
+      console.log(info["my friend"]); // wf
+      info["paly games"](); // games
+
+      var play = "paly games";
+      info[play](); // games
+      console.log(info[message]); // 你好, 世界
+    </script>
+  </body>
+</html>
