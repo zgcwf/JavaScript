@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+      var info = obj;
+
+      obj.age = 20;
+      console.log(obj.age, info.age); // 20 20
+
+      var msg = "Hello";
+
+      var detail = msg;
+
+      console.log(msg, detail); // Hello Hello
+
+      msg = "World";
+      console.log(msg, detail); // World Hello
+
+      var obj2 = {};
+      var obj3 = {};
+
+      // 2.
+      console.log(info === obj); // true;
+      console.log(obj2 === obj3); // false;
+
+      var msg1 = "Hello";
+      console.log(msg === msg1); //true
+
+      var user = {
+        name: "zgc",
+        friend: {
+          name: "wf",
+        },
+      };
+      var friend = user.friend;
+      friend.name = "wlc";
+      console.log(user.friend.name); // wlc;
+
+      // 3.
+      function foo(a) {
+        a = 200;
+      }
+
+      var baz = 100;
+      foo(baz);
+      console.log(baz); // 100
+
+      // 4.
+      function foo1(a) {
+        a.age = 18;
+
+        // 创建了一个新对象, 没有对传入对象进行修改
+        a = {
+          name: "wf",
+        };
+      }
+
+      var baz = {
+        name: "zgc",
+      };
+      foo1(baz);
+      console.log(baz); // {name: 'zgc', age =18}
+    </script>
+  </body>
+</html>
