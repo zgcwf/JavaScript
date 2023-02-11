@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 全局对象: 浏览器中存在一个全局对象window
+      console.log(window);
+      // 作用1: 查找变量时, 最终会找到window身上, 如果window也不存在该变量就会报错
+      // 作用2: 将一些浏览器全局提供给我们的变量/方法/对象放在window上面, 方便我们使用
+      // 作用3: 使用var定义的全局变量会被添加到window上面
+
+      var message = "zgc";
+      console.log(window.message); // zgc
+
+      function foo() {
+        // abc(); // abc is not defined
+        alert("zgc"); // alert方法在window上, 所以能够使用
+        console.log(window.console === console); // true
+      }
+      // foo();
+
+      // 2. 函数也是一个对象
+      var foo = function () {}; // 存储在堆内存中
+      function bar() {} // 存储在堆内存中
+      var baz = foo; // 存储在堆内存中, baz和foo都是同一个内存地址, 指向同一块存储数据
+    </script>
+  </body>
+</html>
