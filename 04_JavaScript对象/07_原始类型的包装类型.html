@@ -23,10 +23,15 @@
       // 案例:
       var str = "hello zgc";
       var str1 = str.substring(2);
-      // 等价于
+      // 等价于:
       var str = new String("hello zgc"); // 创建String类型的实例, 浏览器内部默认执行
       var str1 = str.substring(2); //在实例上调用指定的属性或方法
       str1 = null; // 销毁这个实例
+
+      // 不能为基本类型的值添加属性和方法
+      var str = "zgc";
+      str.age = 23;
+      console.log(str.age); // undefined
     </script>
   </body>
 </html>

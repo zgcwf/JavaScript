@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Number实例方法:
+      var num = 3.1415926; // 等价于new Number(3.1415926) -> 包装类型
+
+      // 1. toString(base), 将数字转化为字符串, 并且按照base进制进行转化
+      // base的范围是 2 - 36, 默认情况下是10
+      var str = num.toString();
+      console.log("str", str, typeof str, "num", num, typeof num);
+      // str 3.1415926 string num 3.1415926 number
+
+      console.log(num.toString(2)); // 转化为2进制的字符串类型
+      console.log(num.toString(8)); // 转化为8进制的字符串类型
+      console.log(num.toString(16)); // 转化为16进制的字符串类型
+
+      // 2. toFixed(digits) 格式化一个数字, 保留digits小数位, 会进行四舍五入
+      // digits的范围是 0 - 20(包含) 之间
+      var pi = num.toFixed(3);
+      console.log(pi); // 3.142
+
+      // Number类方法:
+      var msg = "123.321";
+      console.log(Number(msg)); // 123.321
+      // 1. Number.parseInt(string, radix), 将字符串解析成整数, 也有对应的全局方法parseInt
+      // radix(可选 ):表示要解析的数字的基数。该值介于 2 ~ 36 之间。
+      // 值不会进行四舍五入
+      console.log(Number.parseInt(msg)); // 123
+      // 在window上的方法
+      console.log(parseInt(msg)); // 123
+
+      // 2.  Number.parseFloat(), 将字符串解析成浮点数, 也有对应的全局方法parseFloat
+      console.log(Number.parseFloat(msg)); // 123.321
+      console.log(parseFloat(msg)); // 123.321
+
+      console.log(window.parseInt === Number.parseInt); //true
+    </script>
+  </body>
+</html>
