@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 设计模式: 工厂函数 -> 创建一系列相似结构和功能的对象
+      function createPerson(name, age, height) {
+        let o = new Object();
+        o.name = name;
+        o.age = age;
+        o.height = height;
+        o.sayName = function () {
+          console.log(this.name);
+        };
+        return o;
+      }
+
+      function createStudent() {
+        let o = {};
+        return o;
+      }
+
+      let person1 = createPerson("zgc", 23, "1.88");
+      let person2 = createPerson("wf", 25, "1,89");
+      let student = createStudent();
+      console.log(person1, person2, student); 
+      // 在打印对象时, 都是Object类型的对象: Object Object Object
+    </script>
+  </body>
+</html>

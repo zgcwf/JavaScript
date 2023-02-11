@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 相比工厂函数, JS已经默认提供了一种更加符合JavaScript思维方式(面向对象的思维方式)的创建对象的规则
+
+      /*
+      如果一个函数被new操作符调用:
+      1. 首先在堆内存中创建了一个新的空对象
+      2. 设置原型，将对象的原型设置为构造函数的prototype属性。
+      3. 让函数的this指向这个对象，执行构造函数的代码（为这个新对象添加属性）
+      4. 判断函数的返回值类型，如果是值类型，返回创建的对象。如果是引用类型，就返回这个引用类型的对象。
+      */
+      function Person(name, age, height) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+        this.sayName = function () {
+          console.log(this.name);
+        };
+      }
+
+      function Student() {}
+
+      var person1 = new Person("zgc", 23, "1.88");
+      var person2 = new Person("wf", 25, "1,89");
+      var student = new Student();
+
+      console.log("构造函数", person1, person2, student); // 在打印对象时, 可以看到对象的具体类型: Person Person Student
+    </script>
+  </body>
+</html>
