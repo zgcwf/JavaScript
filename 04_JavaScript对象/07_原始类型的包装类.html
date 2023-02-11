@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // JavaScript的原始类型并非对象类型, 所以从理论上来讲, 它们是没有办法获取属性和调用方法的
+      // 但是, 在开发中我们经常会看到类似操作:
+      var message = "Hello World";
+      console.log(message.length); // 11
+
+      var num = 12.34567;
+      console.log(num.toFixed(2)); // 12.35
+
+      // 为什么会出现这种现象呢?
+      // 原始类型是简单的值, 默认不能调用属性和方法
+      // 这是因为JS为了使其获取属性和调用方法, 对其封装了对应的包装类型
+
+      // 案例:
+      var str = "hello zgc";
+      var str1 = str.substring(2);
+      // 等价于
+      var str = new String("hello zgc"); // 创建String类型的实例, 浏览器内部默认执行
+      var str1 = str.substring(2); //在实例上调用指定的属性或方法
+      str1 = null; // 销毁这个实例
+    </script>
+  </body>
+</html>
