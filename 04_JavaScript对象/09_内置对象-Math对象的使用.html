@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Math是一个内置对象(不是构造函数), 它拥有一些数学常数属性和数学函数方法
+      console.log(typeof Number); // function
+      console.log(typeof Math); // object
+
+      // 1. pi的值
+      console.log(Math.PI); // 3.141592653589793
+      // 2. 向上舍入取整
+      console.log(Math.ceil(3.55)); //  4
+      // 3. 向下舍入取整
+      console.log(Math.floor(3.55)); //  3
+      // 4. 四舍五入取整
+      console.log(Math.round(3.55)); //  4
+      // 5. 生成 [0, 1)的随机数
+      console.log(Math.random());
+      // 6. Math.pow(x, y) x的y次幂
+      console.log(Math.pow(2, 3)); //  8
+      // 7. 取绝对值
+      console.log(Math.abs(-32)); // 32
+      
+      // 案例1: 生成 [5, 50) 的随机整数
+      var num = Math.floor(Math.random() * 45) + 5;
+      console.log(num);
+    </script>
+  </body>
+</html>
