@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 字面量创建(推荐)
+      var names = ["zgc", "wf ", "wlc", "cx"];
+      var products = [
+        { name: "鼠标", price: 98 },
+        { name: "键盘", price: 198 },
+        { name: "显示器", price: 1988 },
+      ];
+      console.log(names[1], names["1"]); // wf wf
+
+      // 2. 构造函数创建
+      var arr1 = new Array();
+      console.log(arr1); // []
+
+      var arr2 = new Array("abc", "cba", "cab");
+      console.log(arr2); // ['abc', 'cba', 'cab']
+
+      // 传入一个数字, 他会默认当成我们要创建一个对应长度的数组, 数组中的每一项内容为undefined
+      var arr3 = new Array(5);
+      console.log(arr3, arr3[0]); // [empty × 5] undefined
+    </script>
+  </body>
+</html>
