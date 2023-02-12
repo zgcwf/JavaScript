@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 访问数组的元素
+      var names = ["zgc", "wf ", "wlc", "cx"];
+
+      console.log(names[2], names["2"]); // wlc wlc
+
+      // arr.at(i): i > 0时,. 则与arr[i]完全相同, i < 0 时, 则从数组的尾部向前数
+      console.log(names.at(0)); // zgc
+      console.log(names.at(-1)); // cx
+
+      // 2. 修改数组的元素
+      names[0] = "zqy";
+      console.log(names); // ['zqy', 'wf ', 'wlc', 'cx']
+
+      // 3. 新增数组的元素
+      // push(): push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度
+      let a1 = [1, 2, 3];
+      let item1 = a1.push("末尾1", "末尾2"); // 5
+      console.log(a1); // [1,2,3,末尾1",'末尾2']
+
+      // unshift(): unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度
+      let a2 = [1, 2, 3];
+      let item2 = a2.unshift("开头"); // 4
+      console.log(a2); // ['开头',1,2,3]
+
+      // 4. 删除数组的元素
+      // shift(): shift()方法删除数组的第一个元素，并返回这个元素
+      let a3 = [1, 2, 3];
+      let item3 = a3.shift(); // 1
+      console.log(a3); // [2,3]
+      // pop(): pop() 方法删除一个数组中的最后的一个元素，并且返回这个元素
+      let a4 = [1, 2, 3];
+      let item4 = a4.pop(); // 3
+      console.log(a4); // [1,2]
+
+      // 5. splice(): 添加/删除/替换数组元素, 原数组会被改变
+      // array.splice(index, howmany, item1,.....,itemX )
+      // index：必需, 整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置
+      // howmany：可选, 要删除的项目数量。如果设置为 0，则不会删除项目
+      // item1, ..., itemX： 可选。向数组添加的新项目。
+
+      // 如果有元素被删除,返回包含被删除项目的新数组
+
+      var list = [1, 2, 3, 4, 5, 6, 7];
+      var newList = list.splice(0, 2);
+      console.log(newList, list); //  [1, 2]  [3, 4, 5, 6, 7]
+
+      var list = [1, 2, 3, 4, 5, 6, 7];
+      var newList = list.splice(2, 1);
+      console.log(newList, list); //  [3]  [1, 2, 4, 5, 6, 7]
+
+      var list = [1, 2, 3, 4, 5, 6, 7];
+      var newList = list.splice(2, 1, "zgc", "wf");
+      console.log(newList, list); //  [3]  [1, 2, 'zgc', 'wf', 4, 5, 6, 7]
+
+      // 添加是在开始的元素前面添加的
+      // [] 没有删除元素，返回空数组
+      var list = [1, 2, 3, 4, 5, 6, 7];
+      var newList = list.splice(2, 0, "zgc", "wf");
+      console.log(newList, list); //  []  [1, 2, 'zgc', 'wf', 3, 4, 5, 6, 7]
+
+      // 数组如果元素不够，会删除到最后一个元素为止
+      var list = [1, 2, 3, 4, 5, 6, 7];
+      var newList = list.splice(-1, 5);
+      console.log(newList, list); //  [7]  [1, 2, 3, 4, 5, 6]
+    </script>
+  </body>
+</html>
