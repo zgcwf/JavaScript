@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. forEach: 遍历数组, 按升序为数组中含有效值的每一项执行一次回调函数
+      // arr.forEach(function (currentValue, currentIndex, arr) {}, thisArg);
+
+      //currentValue  必需。当前元素
+      //currentIndex  可选。当前元素的索引
+      //arr           可选。当前元素所属的数组对象。
+      //thisArg       可选参数。当执行回调函数时，用作 this 的值。
+
+      // 2. forEach注意事项:
+      let a = [1, 2, , 3]; // 最后下标第二个元素是空的，不会遍历(undefined、null会遍历)
+      let obj = { name: "OBKoro1" };
+      let result = a.forEach(function (value, index, array) {
+        a[3] = "改变元素";
+        a.push("添加到尾端，不会被遍历");
+        // console.log(value, "forEach传递的第一个参数", index, array, array.length);
+        console.log(this.name); // 默认this是window，这里this绑定在obj对象上，所以OBKoro1 打印三次
+        // break; // break会报错
+        return value; // return只能结束本次回调 会执行下次回调
+        console.log("不会执行, 因为return 会执行下一次循环回调");
+      }, obj);
+      console.log("result", result); // 即使return了一个值,也还是返回undefined
+
+      //  1 'forEach传递的第一个参数' 0  [1, 2, 空白, '改变元素', '添加到尾端，不会被遍历'] 5
+      // OBKoro1
+      // 2 'forEach传递的第一个参数' 1  [1, 2, 空白, '改变元素', '添加到尾端，不会被遍历', '添加到尾端，不会被遍历'] 6
+      // OBKoro1
+      // 改变元素 forEach传递的第一个参数 3 (7) [1, 2, 空白, '改变元素', '添加到尾端，不会被遍历', '添加到尾端，不会被遍历', '添加到尾端，不会被遍历'] 7
+      // OBKoro1
+      // result undefined
+
+      /*
+       1. 无法中途退出循环，只能用return退出本次回调，进行下一次回调。
+       2. 它总是返回 undefined值,即使你return了一个值。
+       3. 对于已在迭代过程中删除的元素，或者空元素会跳过回调函数
+       4. 遍历次数再第一次循环前就会确定，再添加到数组中的元素不会被遍历
+       5. 如果已经存在的值被改变，则传递给 callback 的值是遍历到他们那一刻的值
+      */
+
+      // 2. 手写forEach
+      var products = [
+        { name: "鼠标", price: 98 },
+        { name: "键盘", price: 198 },
+        { name: "显示器", price: 1988 },
+      ];
+      var test = {
+        name: "zgc",
+      };
+
+      Array.prototype._forEach = function (fn, ins) {
+        if (typeof fn !== "function") throw Error("回调函数不是一个函数~");
+        for (let i = 0; i < this.length; i++) {
+          fn.call(ins, this[i], i, this);
+        }
+      };
+      products._forEach(function (item, index, arr) {
+        console.log(item, index, arr, this);
+      }, test);
+      // 当指定this值时, 不要使用箭头函数的书写方式
+    </script>
+  </body>
+</html>
