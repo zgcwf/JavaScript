@@ -57,7 +57,6 @@
       };
 
       Array.prototype._forEach = function (fn, ins) {
-        if (typeof fn !== "function") throw Error("回调函数不是一个函数~");
         for (let i = 0; i < this.length; i++) {
           fn.call(ins, this[i], i, this);
         }
@@ -65,7 +64,8 @@
       products._forEach(function (item, index, arr) {
         console.log(item, index, arr, this);
       }, test);
-      // 当指定this值时, 不要使用箭头函数的书写方式
+      // 注：当回调函数是箭头函数时，参数2无效，始终指向全局window变量
+      // 即当指定this值时, 不要使用箭头函数的书写方式
     </script>
   </body>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // array.find(function(item, index, arr), ins)
+      // 回符合测试条件的第一个数组元素值，如果没有符合条件的则返回 undefined
+
+      // array.findIndex(function(item, index, arr), ins)
+      // 返回符合测试条件的第一个数组元素索引，如果没有符合条件的则返回 -1
+
+      // 参数1：回调函数（必需）
+      // 参数2：传递给回调函数的this指针（可选）, 如果这个参数为空，this指针为window
+      // 注：当回调函数是箭头函数时，参数2无效，始终指向全局window变量
+
+      var products = [
+        { name: "鼠标", price: 98 },
+        { name: "键盘", price: 198 },
+        { name: "显示器", price: 1988 },
+      ];
+      var test = {
+        name: "zgc",
+      };
+
+      Array.prototype._find = function (fn, ins) {
+        let res;
+        for (let i = 0; i < this.length; i++) {
+          if (fn.call(ins, this[i], i, this)) {
+            res = this[i];
+            break;
+          }
+        }
+        return res;
+      };
+
+      Array.prototype._findIndex = function (fn, ins) {
+        let res = -1;
+        for (let i = 0; i < this.length; i++) {
+          if (fn.call(ins, this[i], i, this)) {
+            res = i;
+            break;
+          }
+        }
+        return res;
+      };
+
+      var pro1 = products._find(function (item, index, arr) {
+        // console.log(item, index, arr, this);
+        return item.name === "鼠标";
+      }, test);
+
+      console.log(pro1); // {name: '键盘', price: 198}
+
+      var pro2 = products._findIndex(function (item, index, arr) {
+        // console.log(item, index, arr, this);
+        return item.name === "键盘";
+      }, test);
+
+      console.log(pro2); // 1
+    </script>
+  </body>
+</html>
