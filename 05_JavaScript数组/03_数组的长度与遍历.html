@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var names = ["zgc", "wf", "wlc", "cx"];
+
+      // 1. 查看数组长度
+      console.log(names.length); // 4
+
+      // 2. 数组的长度是可写的, 即可以给数组手动扩容
+      names.length = 8;
+      console.log(names); // ['zgc', 'wf', 'wlc', 'cx', 空属性 × 4]
+
+      // 3. 如果设置的长度小于数组的原长度, 那么数组会发生截取
+      // 所以如果想要清空数组, 可以设置 arr.length = 0
+      names.length = 2;
+      console.log(names); // ['zgc', 'wf']
+
+      // 4. 数组的遍历
+      var arr = ["zgc", "wf", "wlc", "cx"];
+
+      // 4.1 for循环
+      for (var i = 0; i < arr.length; i++) {
+        console.log(arr[i]); // "zgc" "wf" "wlc" "cx"
+      }
+
+      // 4.2 for...in
+      for (var index in arr) {
+        console.log(index); // 0 1 2 3
+      }
+
+      // 4.3 for...of
+      for (var item of arr) {
+        console.log(item); // // "zgc" "wf" "wlc" "cx"
+      }
+    </script>
+  </body>
+</html>
