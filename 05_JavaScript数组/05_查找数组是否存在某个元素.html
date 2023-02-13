@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 数组中存放的是原始类型
+      var names = ["zgc", "wf", "wlc", "cx"];
+
+      // indexOf(): 查找数组是否存在某个元素，返回在数组中可以找到给定元素的第一个索引，如果不存在，则返回-1
+      // 数组的indexOf搜索跟字符串的indexOf不一样,数组的indexOf使用严格相等===搜索元素，即数组元素要完全匹配才能搜索成功。
+      // indexOf()不能识别NaN
+      console.log(names.indexOf("wf")); // 1
+
+      // 2. 数组中存放的是复杂类型
+      var products = [
+        { name: "鼠标", price: 98 },
+        { name: "键盘", price: 198 },
+        { name: "显示器", price: 1988 },
+      ];
+
+      // 2.1 for
+      var pro1 = null;
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].name === "键盘") {
+          pro1 = products[i];
+          break;
+        }
+      }
+      console.log("pro1", pro1); // {name: '键盘', price: 198}
+
+      // 2.2 find: 高阶函数
+      // 用于找出第一个符合条件的数组成员，并返回该成员，如果没有符合条件的成员，则返回undefined。
+      var pro2 = products.find((item, index, arr) => {
+        // console.log(item, index, arr); // 数组当前元素的值, 当前元素的索引值, 数组对象本身
+        // if(item.name === "键盘") return true
+        return item.name === "键盘";
+      });
+      console.log("pro2", pro2);
+
+      // 2.3 findIndex: 高阶函数
+      // 返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1。
+      var pro3 = products.findIndex((item, index, arr) => item.name === "显示器");
+      console.log("pro3", pro3); // 2
+    </script>
+  </body>
+</html>

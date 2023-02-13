@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. array.slice(begin, end); 截取数组的元素, 取值范围: [begin, end)
+      // begin(可选): 索引数值, 接受负值，从该索引处开始提取原数组中的元素
+      // end(可选):索引数值(不包括), 接受负值，在该索引处前结束提取原数组元素
+      var names = ["zgc", "wf", "wlc", "cx"];
+
+      // 不改变原数组, 返回一个新的数组
+      console.log(names.slice(2, 3), names); // ['wlc']  ['zgc', 'wf', 'wlc', 'cx']
+
+      // 可以用来浅拷贝数组
+      console.log(names.slice(), names); // ['zgc', 'wf', 'wlc', 'cx'] (4) ['zgc', 'wf', 'wlc', 'cx']
+
+      /*
+      tips:
+         新数组是浅拷贝的，且元素是简单数据类型，改变之后新旧数组不会互相干扰
+         如果数组元素是复杂数据类型(对象,数组)的话，改变其中一个的值，另外一个也会改变
+      */
+      let test = [{ name: "OBKoro1" }];
+      let clone = test.slice();
+      console.log(test, clone); // [{"name":"OBKoro1"}]  [{"name":"OBKoro1"}]
+
+      test[0].name='改变原数组';
+      console.log(test, clone); // [{"name":"改变原数组"}] [{"name":"改变原数组"}]
+
+      clone[0].name='改变拷贝数组',clone[0].koro='改变拷贝数组';
+      console.log(test, clone); 
+      //  [{"name":"改变拷贝数组","koro":"改变拷贝数组"}] [{"name":"改变拷贝数组","koro":"改变拷贝数组"}]
+
+      // 2. concat方法用于合并两个或多个数组，不改变原数组, 返回一个新数组
+      let a = [1, 2, 3];
+      let b = [4, 5, 6];
+      //连接两个数组
+      let newVal = a.concat(b); // [1,2,3,4,5,6]
+      // 连接三个数组
+      let c = [7, 8, 9];
+      let newVal2 = a.concat(b, c); // [1,2,3,4,5,6,7,8,9]
+      // 添加元素
+      let newVal3 = a.concat("添加元素", b, c, "再加一个");
+      // [1,2,3,"添加元素",4,5,6,7,8,9,"再加一个"]
+      // 合并嵌套数组  会浅拷贝嵌套数组
+      let d = [1, 2];
+      let f = [3, [4]];
+      let newVal4 = d.concat(f); // [1,2,3,[4]]
+
+      // 3. join方法用于把数组中的所有元素通过指定的分隔符进行分隔放入一个字符串，返回生成的字符串(不改变原数组)
+      let list = ["hello", "world"];
+      let str1 = list.join(); // 'hello,world'
+      let str2 = list.join(" "); // 'hello world'
+      let str3 = list.join("+"); // 'hello+world'
+      console.log(str1, str2, str3);
+    </script>
+  </body>
+</html>
