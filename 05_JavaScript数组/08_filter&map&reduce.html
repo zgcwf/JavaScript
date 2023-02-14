@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. filter: 过滤原始数组，返回一个新数组, 其包含通过所提供函数实现的测试的所有元素
+      // let new_array = arr.filter(function(item, index, arr), thisArg)
+
+      // 参数1：回调函数（必需）
+      // 参数2：传递给回调函数的this指针（可选）, 如果这个参数为空，this指针为window
+
+      // 回调函数的参数
+      // 1. item(必须),数组当前元素的值
+      // 2. index(可选), 当前元素的索引值
+      // 3. arr(可选),数组对象本身
+
+      var products = [
+        { name: "鼠标", price: 98 },
+        { name: "键盘", price: 198 },
+        { name: "显示器", price: 1988 },
+      ];
+
+      // var new_array = products.filter(
+      //   (item, index, arr) => item.name !== "键盘"
+      // );
+      // console.log(new_array);
+      // [ { name: "鼠标", price: 98 }, { name: "显示器", price: 1988 } ];
+
+      // 手写filter方法
+      Array.prototype._filter = function (fn, ins) {
+        let result = [];
+        for (let i = 0; i < this.length; i++) {
+          if (fn.call(ins, this[i], i, this)) {
+            result.push(this[i]);
+          }
+        }
+        return result;
+      };
+
+      var new_array = products._filter((item) => item.name !== "键盘");
+      console.log(new_array);
+
+      // 2. map 对数组中的每个元素进行处理，返回新的数组，其结果是原数组中的每个元素都调用提供的方法后返回的结果
+      // let new_array = arr.map(function(item, index, arr), thisArg) // 同 filter
+
+      var map_array = products.map((item) => {
+        return { ...item, tag: "数码" };
+      });
+      console.log(map_array);
+      // [
+      //   { name: "鼠标", price: 98, tag: "数码" },
+      //   { name: "键盘", price: 198, tag: "数码" },
+      //   { name: "显示器", price: 1988, tag: "数码" },
+      // ];
+
+      // 3. reduce 为数组提供累加器，合并为一个值
+      // array.reduce(function(total, item, index, arr), initialValue)
+
+      // 参数1：回调函数（必需）
+      // 参数2：指定第一次回调 的第一个参数, 即total的初始值 (可选)
+      /*
+        如果 initialValue 在调用 reduce 时被提供，那么第一个 total 将等于 initialValue，此时 item 等于数组中的第一个值;
+        如果 initialValue 未被提供，那么 total 等于数组中的第一个值，item 等于数组中的第二个值。此时如果数组为空，那么将抛出 TypeError;
+        如果数组仅有一个元素，并且没有提供 initialValue，或提供了 initialValue 但数组为空，那么回调不会被执行，数组的唯一值将被返回;
+        */
+
+      // 回调函数的参数
+      // 1. total(必须)，初始值, 或者上一次调用回调返回的值
+      // 2. item(必须),数组当前元素的值
+      // 3. index(可选), 当前元素的索引值
+      // 4. arr(可选),数组对象本身
+
+      // 数组求和
+      var nums = [1, 2, 3, 4, 5];
+      // 第一次执行: total -> 0 , item -> 1
+      // 第二次执行: total -> 1 , item -> 2
+      // 第三次执行: total -> 3 , item -> 3
+      // 第四次执行: total -> 6 , item -> 4
+      // 第五次执行: total -> 10 , item -> 5
+      var new_nums = nums.reduce((total, item) => {
+        return total + item;
+      }, 0);
+      // 第一次执行: total -> 1 , item -> 2
+      // 第二次执行: total -> 3 , item -> 3
+      // 第三次执行: total -> 6 , item -> 4
+      // 第四次执行: total -> 10 , item -> 5
+      var new_nums2 = nums.reduce((total, item) => {
+        return total + item;
+      });
+      console.log(new_nums, new_nums2); // 15 15
+
+      // 将二维数组转化为一维 将数组元素展开
+      const arrs = [
+        [0, 1],
+        [2, 3],
+        [4, 5],
+      ];
+      // 第一次执行: total -> [] , item -> [0, 1]
+      // 第二次执行: total -> [0, 1] , item -> [2, 3]
+      // 第三次执行: total -> [0, 1, 2, 3], item -> [4, 5]
+      let flattened = arrs.reduce((total, item) => total.concat(item), []);
+      // [0, 1, 2, 3, 4, 5]
+
+      // 练习1: 计算总价格
+      var products = [
+        { name: "鼠标", price: 100, count: 3 },
+        { name: "键盘", price: 200, count: 5 },
+        { name: "显示器", price: 2000, count: 1 },
+      ];
+
+      var totalPrice = products.reduce((total, item) => {
+        return total + item.price * item.count;
+      }, 0);
+      console.log(totalPrice); // 3300
+
+      // 练习2: 得到所有的偶数, 映射所有偶数的平方, 并计算它们的和
+      var list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      var total = list
+        .filter((item) => item % 2 === 0)
+        .map((item) => item * item)
+        .reduce((total, item) => total + item, 0);
+      console.log(total);
+    </script>
+  </body>
+</html>
