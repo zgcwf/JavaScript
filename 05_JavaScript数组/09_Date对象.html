@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Date 对象用于处理日期和时间。
+
+      // 实例化日期有四种方式：
+      // var d = new Date();
+      // var d = new Date(milliseconds);
+      // var d = new Date(dateString);
+      // var d = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+
+      // 1. 没有任何传入对象, 截取到当前时间
+      var d1 = new Date();
+      console.log("d1", d1); // Tue Feb 14 2023 11:58:21 GMT+0800
+
+      // 2. 传递从1970年1月1日0点的毫秒数，根据传递的这个毫秒数来创建日期对象(时间戳)
+      var d2 = new Date(10078273200453);
+      console.log("d2", d2); // Wed May 15 2289 00:20:00 GMT+0800
+
+      // 3. 传入参数: 时间字符串, 根据日期字符串创建一个新的日期对象
+      var d3 = new Date("2022-08-15");
+      console.log("d3", d3); // Mon Aug 15 2022 08:00:00 GMT+0800
+
+      // 4. 用指定日期和时间创建新的日期对象, 传入具体的年月日时分秒毫秒
+      // 7个数字分别指定年、月、日、小时、分钟、秒和毫秒（按此顺序）;
+      // JavaScript 从 0 到 11 计算月份, 一月是 0。十二月是11;
+      var d4 = new Date(2033, 10, 12, 09, 08, 07, 333);
+      console.log("d4", d4); // Sat Nov 12 2033 09:08:07 GMT+0800: 周六 11月 12日 2033年9点8分7秒
+
+      // 1. getFullYear() 返回四位数年份
+      console.log(new Date().getFullYear()); // 2023
+
+      // 2. getMonth() 返回值0（一月） 到 11（十二月） 之间的一个整数
+      console.log(new Date().getMonth()); // 1 : (2月)
+
+      // 3. getDate() 返回一个月中的第几天（1 ~ 31）
+      console.log(new Date().getDate()); // 14
+
+      // 4. getDay() 返回星期，一周中的第几天（0 ~ 6，礼拜天是0）
+      console.log(new Date().getDay()); // 2
+
+      // 5. getHours() 返回小时 (0 ~ 23)
+      console.log(new Date().getHours()); // 16
+
+      // 6. getMinutes() 返回分钟 (0 ~ 59)
+      console.log(new Date().getMinutes()); // 42
+
+      // 7. getSeconds() 返回秒数 (0 ~ 59)
+      console.log(new Date().getSeconds()); // 49
+
+      // 8. getMilliseconds() 返回毫秒(0 ~ 999)
+      console.log(new Date().getMilliseconds()); // 334
+
+      // 9. getTime() 根据本地时返回 1970 年 1 月 1 日至今的毫秒数
+      console.log(new Date().getTime()); // 1676364191291
+
+      // 1. 获取Date的时间戳
+      // 方法1: 获取当前时间的时间戳
+      var timesTamp1 = Date.now();
+      console.log("timesTamp1", timesTamp1);
+
+      // 方法2: 将date对象转换成时间戳
+      var timesTamp2 = d2.getTime();
+      var timesTamp3 = d2.valueOf();
+      console.log("timesTamp2", timesTamp2); // 10078273200453
+      console.log("timesTamp3", timesTamp3); // 10078273200453
+
+      // 方法3: Date.parse: 解析日期字符串，并返回日期字符串与 1970 年 1 月 1 日午夜之间的毫秒数(时间戳)
+      var timeStr = "2033-03-23";
+      console.log(Date.parse(timeStr));
+      // 等同于 new Date(timeStr).getTime()
+      // 建议输入格式: YYYY-MM-DDTHH:MM:SS.sssZ(年月日T时分秒毫秒), 日期和时间通过大写字母 T 来分隔
+      // 如果输入的格式不能被解析, 那么会返回NaN
+    </script>
+  </body>
+</html>
