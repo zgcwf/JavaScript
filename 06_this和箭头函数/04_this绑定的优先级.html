@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo(age) {
+        console.log(this);
+        this.age = age;
+      }
+
+      var obj = {
+        name: "zgc",
+        foo: foo,
+      };
+
+      // 1. 隐式绑定(方法)的优先级高于默认绑定(独立函数调用)
+      obj.foo(18); // obj: {name: 'zgc', age: 18, foo: ƒ}
+
+      // 2. 显式绑定的优先级高于隐式绑定
+      var bar = {
+        name: "cx",
+      };
+
+      obj.foo.call(bar, 18); // bar: {name: 'cx', age: 18}
+
+      // 3. new不可以和call/apply一起使用, 但绑定的优先级高于bind绑定
+      var baz = obj.foo.bind(bar);
+
+      var test = new baz(18);
+      console.log(test); // test: {age: 18}
+
+      // 4. bind的优先级高于 apply/call
+      baz.call(obj); // bar: {name: 'cx', age: 18}
+
+      // 5: 在显式绑定中, 如果我们的第一个参数为null和undefined, 那么这个显式绑定会被忽略, 使用默认规则
+      obj.foo.call(null); // window
+
+    </script>
+  </body>
+</html>

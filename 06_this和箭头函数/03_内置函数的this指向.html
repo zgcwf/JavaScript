@@ -31,6 +31,11 @@
       names.forEach(function () {
         console.log("forEach", this); // { name: "zgc" }
       }, obj);
+
+      // 4. 补充: 立即执行函数this指向window
+      (function () {
+        console.log("立即执行函数", this);
+      })();
     </script>
   </body>
 </html>
