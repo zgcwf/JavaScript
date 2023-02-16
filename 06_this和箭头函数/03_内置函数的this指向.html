@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>按钮</button>
+    <script>
+      //  JavaScript的内置函数
+      // 1. 定时器
+      setTimeout(function () {
+        console.log("定时器", this); // window
+      }, 1000);
+
+      // 2. 点击事件
+      var btn = document.querySelector("button");
+      // btn.onclick = function () {
+      //   console.log("btn", this); // btn(<button>按钮</button>)
+      // };
+      btn.addEventListener("click", function () {
+        console.log("btn", this); // btn(<button>按钮</button>)
+      });
+
+      // 3. forEach等方法
+      //默认 window, 第二个参数可以绑定this
+      var names = ["zgc", "wf"];
+      var obj = { name: "zgc" };
+      names.forEach(function () {
+        console.log("forEach", this); // { name: "zgc" }
+      }, obj);
+    </script>
+  </body>
+</html>
