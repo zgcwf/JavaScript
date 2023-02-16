@@ -8,7 +8,60 @@
   </head>
   <body>
     <script>
-      
+      // 1. 箭头函数的定义
+      // var foo = (参数1, 参数2) => { 代码块 };
+
+      // 2. 当省略花括号与return, 并且返回值是一个对象时, 对象必须包一个小括号
+      var num = () => 1;
+      var obj = () => ({ name: "zgc" });
+      console.log(num(), obj()); // 1 {name: 'zgc'}
+
+      // 3. this的使用
+      // 箭头函数其实本身并没有绑定this,，即箭头函数的this去他的上级作用域下寻找
+      // 所以任何方法都无法改变该this的指向
+      var foo = () => {
+        console.log(this);
+      };
+      foo(); // window
+
+      var obj = {
+        name: "zgc",
+        running: () => {
+          // 这里的上级作用域是window, 对象是数据类型, 不是代码块, 没有作用域
+          console.log("箭头函数", this); // window
+        },
+      };
+      obj.running();
+
+      var obj = {
+        name: "wf",
+        running: function () {
+          // 这里的上级作用域是window, 对象是数据类型, 不是代码块, 没有作用域
+          console.log("普通函数", this); // obj
+          var bar = () => {
+            console.log("bar", this); // obj
+          };
+          return bar;
+        },
+      };
+      const fn1 = obj.running();
+      fn1();
+
+      var name = "xxxx";
+      var obj = {
+        name: "wf",
+        running: function () {
+          // 这里的上级作用域是window, 对象是数据类型, 不是代码块, 没有作用域
+          console.log("普通函数", this); // window
+          var bar = () => {
+            console.log("bar", this, name); // window xxxx
+          };
+          return bar;
+        },
+      };
+      const fn2 = obj.running;
+      fn2();
+      fn2()();
     </script>
   </body>
 </html>
