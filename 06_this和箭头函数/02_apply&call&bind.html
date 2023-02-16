@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var obj = {
+        name: "zgc",
+      };
+
+      function foo(name, age) {
+        console.log("foo", this, name, age);
+      }
+
+      // 让 foo的this指向obj
+      // 1. call
+      // 第一个参数, 绑定this
+      // 第二个参数开始, 以参数列表的形式展现
+      foo.call(obj, "zgc", 18); // foo {name: 'zgc'} zgc 18
+
+      // 2. apply
+      // 第一个参数, 绑定this
+      // 第二个参数, 以数组的形式传入额外的实参
+      foo.apply(obj, ["wf", 20]); // foo {name: 'zgc'} wf 20
+
+      // 3. bind
+      // 如果我们希望一个函数总是显示的绑定在一个对象上, 而不是每一次调用时再去绑定, 那么可以使用bind
+      //  bind方法通过传入一个对象，返回一个 this 绑定了传入对象的新函数, 便于稍后调用
+      // 第一个参数, 绑定this
+      // 第二个参数开始, 以参数列表的形式展现
+      const baz = foo.bind(obj, "wlc", 22);
+      baz(); // foo {name: 'zgc'} wlc 22]
+
+      const bar = foo.bind(obj);
+      bar("cx", 24); // foo {name: 'zgc'} cx 24
+    </script>
+  </body>
+</html>

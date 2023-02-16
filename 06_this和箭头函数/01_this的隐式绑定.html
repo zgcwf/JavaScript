@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 严格模式:
+      // 'use strict'
+
+      // 1. 独立函数调用
+      function foo() {
+        console.log(this === window); //true
+      }
+      foo();
+
+      // 2. 方法调用
+      var obj = {
+        name: "zgc",
+        running: function () {
+          // 这里的上级作用域是window, 对象是数据类型, 不是代码块, 没有作用域
+          console.log(this);
+        },
+      };
+
+      obj.running(); //obj对象
+
+      var fn = obj.running;
+      fn(); // window对象
+
+      function bar() {
+        console.log(this);
+      }
+      var baz = {
+        name: "wf",
+        bar: bar,
+      };
+      baz.bar(); // baz对象
+
+      function test(fn) {
+        fn();
+      }
+      test(baz.bar); // window对象
+
+      // 3. 构造函数调用(new) 绑定
+      function Student(name) {
+        this.name = name;
+        console.log("构造函数", this); // {name: 'zgc'}
+      }
+      const stu = new Student("zgc");
+
+      // 4. 严格模式下, 独立函数调用this指向的是undefined
+    </script>
+  </body>
+</html>
