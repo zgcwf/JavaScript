@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../js/async.js" async></script>
+  </head>
+  <body>
+    <!-- 不显示 -->
+    <!-- <script src="../js/normal.js"></script>
+    <div>正常的script标签的下载与执行会阻塞DOM树的渲染</div> -->
+
+    <!-- 文字正常显示 -->
+    <!-- <script src="../js/defer.js" defer></script>
+    <div>文档解析和脚本加载是异步的，等文档解析完(DOM Tree构建完成)，脚本才开始执行;</div> -->
+
+    <!-- 文字可能显示也可能不显示 -->
+    <!-- <div>
+      文档解析和脚本加载也是异步的，脚本下载完成后会停止HTML解析，立即执行脚本，脚本解析完继续HTML解析
+    </div> -->
+  </body>
+</html>

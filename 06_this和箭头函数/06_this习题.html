@@ -127,13 +127,13 @@
       var stu3 = new Student2("stu3");
       var stu4 = new Student2("stu4");
 
-      stu3.obj.baz1()() // baz1 window
-      stu3.obj.baz1.call(stu4)() // baz1 window
-      stu3.obj.baz1().call(stu4) // baz1 stu4
+      stu3.obj.baz1()(); // baz1 window
+      stu3.obj.baz1.call(stu4)(); // baz1 window
+      stu3.obj.baz1().call(stu4); // baz1 stu4
 
-      stu3.obj.baz2()() // baz2 obj
-      stu3.obj.baz2.call(stu4)() // baz2 stu4
-      stu3.obj.baz2().call(stu4) // baz2 obj
+      stu3.obj.baz2()(); // baz2 obj
+      stu3.obj.baz2.call(stu4)(); // baz2 stu4
+      stu3.obj.baz2().call(stu4); // baz2 obj
     </script>
   </body>
 </html>
