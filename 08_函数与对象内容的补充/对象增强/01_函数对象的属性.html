@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 定义对象并给对象添加属性和方法
+      var obj = {};
+      obj.name = "zgc";
+      obj.bar = function () {};
+      // console.log(obj);
+
+      // 注意: 在 JS 中函数也属于对象的一种,所以可以给函数添加属性和方法
+      function foo(a, b, c) {
+        console.log(a, b, c);
+      }
+      var bar = function (m, n, ...args) {};
+      function test(x, y = 0) {}
+
+      // 1. 自定义属性
+      foo.message = "Hello";
+      console.log("访问foo的属性", foo.message); // Hello
+
+      // 2. 默认函数对象中已经有两个自己的属性了
+      // (1) name属性 (了解)
+      console.log(foo.name, bar.name); // foo bar
+      // 将多个函数放入数组中,可以以name区分
+      var fns = [foo, bar];
+      for (var fn of fns) {
+        console.log(fn.name);
+      }
+      // (2) length属性, 参数个数的长度
+      // 这个长度是指本来因该获取的参数的个数, 即形参的个数(因为函数在调用时参数可能多传或少传, 所以实参的个数未必等于形参的个数)
+      // 剩余参数是不会算在length里面的, 赋默认值的参数也不会算在length里面
+      console.log(foo.length, bar.length, test.length); // 3,2,1
+      foo(1, 2); // 1 2 undefined
+      foo(1, 2, 3, 4); // 1 2 3
+    </script>
+  </body>
+</html>
