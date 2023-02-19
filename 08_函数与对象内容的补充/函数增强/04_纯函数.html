@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 纯函数，符合函数在相同的输入值时，需产生相同的输出
+      function sum(a, b) {
+        return a + b;
+      }
+
+      // 不是一个纯函数，因为在我们程序执行的过程中，变量num很可能会发生改变
+      let num = 1;
+      function add(x) {
+        return x + num;
+      }
+      add(1);
+
+      // 不是一个纯函数
+      var address = "北京";
+      function printInfo(info) {
+        console.log(info.name); // 有输出数据
+        info.age = 18; // 对参数进行修改
+        address = info.address; // 修改全局变量
+      }
+      var obj = {
+        name: "zgc",
+        address: "上海",
+      };
+      printInfo(obj);
+
+      // 在JavaScript中内置的API也存在有纯函数，我们拿Array对象中的方法来说
+
+      // filter 过滤数组中的元素，它不对原数组进行操作是一个纯函数
+      var names = ["张三", "李四", "王五", "赵六"];
+      var newNames1 = names.filter((n) => n !== "张三");
+      console.log(newNames1); // [ '李四', '王五', '赵六' ]
+      console.log(names); // [ '张三', '李四', '王五', '赵六' ]
+
+      // splice 截取数组的时候会对原数组进行操作，所以不是一个纯函数。
+      var newNames2 = names.splice(2);
+      console.log(newNames2); // [ '王五', '赵六' ]
+      console.log(names); // [ '张三', '李四' ]
+    </script>
+  </body>
+</html>
