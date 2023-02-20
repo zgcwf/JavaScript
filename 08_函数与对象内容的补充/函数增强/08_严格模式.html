@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://wangdoc.com/javascript/oop/strict
+      // 1. 在js文件下给整个文件开启"严格模式":
+      "use strict";
+
+      // 2. 给某个函数开启"严格模式":
+      function foo() {
+        "use strict";
+      }
+
+      // 注意: 严格模式要在文件或者函数的开头使用"use strict";来开启
+
+      // 3. 如 class/module 默认是在严格模式运行的
+
+      // 4. 常见的严格模式限制
+      // (1) 无法意外创建全局变量
+      // 在正常模式中，如果一个变量没有声明就赋值，默认是全局变量。严格模式禁止这种用法，全局变量必须显式声明。
+
+      // v = 1; // 报错，v未声明
+
+      // for (i = 0; i < 2; i++) {
+      //   // 报错，i未声明
+      // }
+
+      // (2) 禁止this关键字指向全局对象
+      // 正常模式下，函数内部的this可能会指向全局对象，严格模式禁止这种用法，避免无意间创造全局变量。
+      // 正常模式
+      function f() {
+        console.log(this === window);
+      }
+      f(); // true
+
+      // 严格模式
+      function f() {
+        "use strict";
+        console.log(this === undefined);
+      }
+      f(); // true
+
+      // (3) 对象不能有重名的属性
+      // 正常模式下，如果对象有多个重名属性，最后赋值的那个属性会覆盖前面的值。严格模式下，这属于语法错误。
+      var o = {
+        p: 1,
+        p: 2,
+      }; // 语法错误
+
+      // (4) 函数不能有重名的参数
+      // 正常模式下，如果函数有多个重名的参数，可以用arguments[i]读取。严格模式下，这属于语法错误。
+      function f(a, a, b) {
+        // 语法错误
+      }
+    </script>
+  </body>
+</html>
