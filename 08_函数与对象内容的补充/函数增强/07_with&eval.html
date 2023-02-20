@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. with: 扩展一个语句的作用域链
+      // 不建议使用with语句，因为它可能是混淆错误和兼容性问题的根源
+      // with (expression) {
+      //   statement;
+      // }
+      // expression: 将给定的表达式添加到在评估语句时使用的作用域链上。表达式周围的括号是必需的。
+      // statement: 任何语句。要执行多个语句，请使用一个块语句 ({ ... }) 对这些语句进行分组。
+      var obj = {
+        userName: "zgc",
+        userAge: 18,
+      };
+      // console.log(userName); // userName is not defined
+      // console.log(userAge); //  userAge is not defined
+      with (obj) {
+        console.log(userName); // zgc
+        console.log(userAge); // 18
+      }
+
+      // 2. eval: 允许执行一个代码字符串
+      // eval是一个特殊的函数, 它可以将传入的字符串当作JS语句执行
+      // 调用 eval(code) 会运行代码字符串，并返回最后一条语句的结果
+      var x = 10;
+      var y = 20;
+      var a = eval("x * y;")
+      var b = eval("2 + 2;")
+      var c = eval("x + 17; console.log(1111);") // 1111
+
+      var res = a + b;
+      console.log(res, a, b, c); // 204 200 4 undefined
+    </script>
+  </body>
+</html>
