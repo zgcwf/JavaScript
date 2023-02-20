@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      // let Person = {};
+      // Person.name = "Jack";
+      // Person["gender"] = "female";
+      // console.log(Person.name); // Jack
+      // console.log(Person.gender); // female
+      // console.log(Person); // {name: 'Jack', gender: 'female'}
+
+      // let Person = {};
+      // Object.defineProperty(Person, "name", {
+      //   value: "Jack",
+      //   // writable默认值是false, 不能改变属性的值
+      // });
+      // Person.name = "rose";
+      // console.log(Person.name); // Jack
+
+      // let Person = {};
+      // Object.defineProperty(Person, "name", {
+      //   value: "Jack",
+      //   writable: true,
+      // });
+      // Person.name = "rose";
+      // console.log(Person.name); // rose
+
+      // let Person = {};
+      // let temp = null;
+      // Object.defineProperty(Person, "name", {
+      //   get: function () {
+      //     return temp;
+      //   },
+      //   set: function (val) {
+      //     temp = val;
+      //   },
+      // });
+
+      // Person.name = "Jack";
+      // console.log(Person.name, temp); // Jack Jack
+
+      // temp = "rose";
+      // console.log(Person.name, temp); // rose rose
+
+      // var obj = {};
+      // Object.defineProperty(obj, "newKey", {
+      //   get: function () {} | undefined,
+      //   set: function (value) {} | undefined,
+      //   configurable: true | false,
+      //   enumerable: true | false,
+      // });
+
+      // var obj = {};
+      // var initValue = "hello";
+      // Object.defineProperty(obj, "key", {
+      //   get: function () {
+      //     //当获取值的时候触发的函数
+      //     return initValue;
+      //   },
+      //   set: function (value) {
+      //     //当设置值的时候触发的函数,设置的新值通过参数value拿到
+      //     initValue = value;
+      //   },
+      // });
+      // //获取值
+      // console.log(obj.key); //hello
+
+      // //设置值
+      // obj.key = "change value";
+
+      // console.log(obj.key); //change value
+
+      // let Person = {};
+      // Object.defineProperty(Person, "name", {
+      //   value: "Jack",
+      //   configurable: false,
+      //   writable: true,
+      // });
+
+      // Object.defineProperty(Person, "name", {
+      //   value: "rose",
+      // });
+
+      // console.log(Person.name); // rose
+
+      // let Person = {};
+      // Object.defineProperty(Person, "name", {
+      //   value: "Jack",
+      //   configurable: true,
+      //   writable: false,
+      // });
+
+      // // 通过属性定义的形式可以修改name的值
+      // Object.defineProperty(Person, "name", {
+      //   value: "rose",
+      // });
+
+      // console.log(Person.name); // rose
+
+      // // 通过赋值的形式不可以修改, 因为writable为flse
+      // Person.name = "zgc";
+      // console.log(Person.name);
+
+      // let Person = {};
+      // Object.defineProperty(Person, "name", {
+      //   value: "Jack",
+      //   configurable: false,
+      //   writable: true,
+      // });
+
+      // // 通过属性定义的形式可以修改name的值
+      // Object.defineProperty(Person, "name", {
+      //   value: "rose",
+      // });
+
+      // console.log(Person.name); // rose
+
+      // // 通过赋值的形式可以修改name的值
+      // Person.name = "zgc";
+      // console.log(Person.name);
+
+      // let Person = {};
+      // Object.defineProperty(Person, "name", {
+      //   value: "Jack",
+      //   configurable: false,
+      //   writable: false, // 默认值
+      // });
+
+      // Person.gender = "male";
+
+      // Object.defineProperty(Person, "age", {
+      //   value: 24,
+      //   enumerable: true,
+      // });
+
+      // console.log(Object.keys(Person)); // ['gender', 'age']
+      // for (let k in Person) {
+      //   console.log(k); // gender, age
+      // }
+
+      // let Person = {};
+      // Person.gender = "male";
+      // // 等价于
+      // Object.defineProperty(Person, "gender", {
+      //   value: "male",
+      //   configurable: true,
+      //   enumerable: true,
+      //   writable: true,
+      // });
+
+      // Object.defineProperty(Person, "age", {
+      //   value: 24,
+      // });
+      // // 等价于
+      // Object.defineProperty(Person, "age", {
+      //   value: 24,
+      //   configurable: false,
+      //   enumerable: false,
+      //   writable: false,
+      // });
+    </script>
+  </body>
+</html>
