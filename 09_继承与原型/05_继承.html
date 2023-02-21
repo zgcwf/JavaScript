@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.say = function () {};
+      }
+
+      Person.prototype.setAge = function () {
+        console.log("111");
+      };
+      // Person.prototype.msg = "Hello";
+
+      function Student(name, age, price) {
+        Person.call(this, name, age);
+        // 子类继承父类自身的属性和方法
+        this.price = price;
+        this.setScore = function () {};
+      }
+
+      function inheritPrototype(subType, superType) {
+        subType.prototype = Object.create(superType.prototype); //核心代码
+        subType.prototype.constructor = subType; //核心代码
+      }
+      // Object.create(obj); 创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+      // subType.prototype.constructor = subType; 将子类原型对象的构造器指向自身构造函数
+
+      inheritPrototype(Student, Person);
+
+      var s1 = new Student("Tom", 20, 15000);
+      console.log(s1 instanceof Student, s1 instanceof Person); // true true
+      console.log(s1.constructor); //Student
+      console.log(s1);
+
+      // 完美写法: inheritPrototype函数封装
+      // function createObject(o) {
+      //   const F = function () {};
+      //   F.prototype = o;
+      //   return new F();
+      // }
+
+      // function inheritPrototype(subType, superType) {
+      //   subType.prototype = createObject(superType.prototype); //核心代码
+      //   Object.defineProperty(subType.prototype, "constructor", {
+      //     value: subType,
+      //     enumerable: false,
+      //     writable: true,
+      //     configurable: true,
+      //   });
+      // }
+
+      // 创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+
+      // 1.
+      var info1 = {};
+      info1.__proto__ = obj;
+
+      // 2.
+      function createObject(o) {
+        const F = function () {};
+        F.prototype = o;
+        return new F();
+      }
+      var info2 = createObject(obj);
+
+      // 3.
+      Object.create(obj);
+    </script>
+  </body>
+</html>
