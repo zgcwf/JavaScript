@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Person() {}
+      // console.log(Person.prototype);
+
+      // 像原型对象上直接添加属性和方法
+      Person.prototype.msg = "Hello World";
+      Person.prototype.info = { name: "zgc", age: 18 };
+      Person.prototype.run = function () {};
+      // console.log(Person.prototype);
+
+      // 如果我们需要在原型上添加过多的属性, 通常我们可以重写整个原型对象
+      Person.prototype = {
+        msg: "Hello Person",
+        info: { name: "wf", age: 24 },
+        run: function () {},
+        // constructor: Person,
+      };
+      // constructor默认是无法枚举的,所以直接添加constructor属性不太适合
+      Object.defineProperty(Person.prototype, "constructor", {
+        value: Person,
+        writable: true,
+        configurable: true,
+        enumerable: false,
+      });
+      var p1 = new Person();
+      console.log(p1.msg); // Hello Person
+    </script>
+  </body>
+</html>
