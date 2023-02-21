@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 什么是原型
+      /*
+      我们创建的每个构造函数都有一个 prototype(原型) 属性，该属性是一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。
+      当我们通过构造函数创建对象时，在这个对象中有一个指针，这个指针指向构造函数的prototype。我们将这个指向构造函数的prototype的指针称为原型。
+      */
+
+      // 2. 对象的原型
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+      console.log(obj);
+
+      // 获取对象的原型
+      console.log(obj.__proto__); // 隐式原型
+      console.log(Object.getPrototypeOf(obj));
+      console.log(Object.getPrototypeOf(obj) === obj.__proto__); // true
+      // 对象原型的作用
+      // 当在自身查找不到属性和方法时, 可以去原型查找
+
+      // 3. 函数的原型
+      function Foo() {}
+
+      // 获取函数的原型
+      console.log(Foo.prototype); // 显式原型, 对象没有prototype属性
+      var f1 = new Foo();
+      var f2 = new Foo();
+      console.log(f1.__proto__ === Foo.prototype); // true
+      console.log(Foo.prototype === f2.__proto__); // true
+      console.log(f1.__proto__ === f2.__proto__); // true
+
+      // 创建三个对象
+      function Foo(name, age) {
+        this.name = name;
+        this.age = age;
+
+        // 方式1: 这样每次都会创建一个新对象, 每个对象都会定义一遍函数, 造成浪费
+        // this.bar = function () {
+        //   console.log(this.name, "bar");
+        // };
+        // this.baz = function () {
+        //   console.log(this.name, "baz");
+        // };
+      }
+      // 方式2: 这将每一个方法定义在原型上面, 这样每个对象调用的都是同一个函数
+      /*
+       即当我们多个对象拥有共同属性时, 我们可以将它放到构造函数的显式原型对象上面,
+       由构造函数创建出来的所有对象都会共享这些属性
+      */
+      Foo.prototype.bar = function () {
+        console.log(this.name, "bar");
+      };
+      Foo.prototype.baz = function () {
+        console.log(this.name, "baz");
+      };
+      var foo1 = new Foo("zgc", 18);
+      var foo2 = new Foo("wf", 24);
+      var foo3 = new Foo("cx", 20);
+
+      console.log(foo1.bar === foo2.bar); // true
+      foo3.baz(); // cx baz
+
+      // 函数原型的作用
+      // 在用new操作符创建对象时, 将自身的prototype属性赋给对象的隐式原型
+    </script>
+  </body>
+</html>
