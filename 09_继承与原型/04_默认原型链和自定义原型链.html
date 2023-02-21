@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+       当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它就会去它的原型对象里找这个属性;
+       这个原型对象又会有自己的原型，这样层层上溯，就形成了一个类似链表的结构，这就是原型链;
+       原型链的尽头一般来说都是Object.prototype所以这就是我们新建的对象为什么能够使用toString()等方法的原因。;
+      */
+      var info = {};
+      //  等价于
+      var info = new Object();
+
+      console.log(info.__proto__ === Object.prototype); // true
+
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+
+      // 查找顺序
+      // 1. 在obj上查找'
+      // 2. 在obj的原型上查找(obj.__proto__)
+      // 3. 在obj的原型的原型上查找上查找(obj.__proto__.__proto__)
+      // 3. 直到某个原型指向null则意味着到原型链尽头,停止查找 返回undefined
+
+      console.log(obj.msg); // undefined
+
+      // 自定义原型链
+      obj.__proto__ = {
+        // msg: "a",
+      };
+      obj.__proto__.__proto__ = {
+        msg: "b",
+      };
+      obj.__proto__.__proto__.__proto__ = {
+        msg: "c",
+      };
+
+      console.log(obj.msg); // b
+      console.log(
+        obj.__proto__.__proto__.__proto__.__proto__ === Object.prototype
+      ); // true
+      console.log(Object.prototype.__proto__); // null
+    </script>
+  </body>
+</html>
