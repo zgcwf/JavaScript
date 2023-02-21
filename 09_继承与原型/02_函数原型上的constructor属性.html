@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 显式原型上面的constructor属性指向了函数对象
+      function Foo() {}
+
+      console.log(Foo.prototype.constructor === Foo); // true
+      console.log(Foo.name); // Foo
+      console.log(Foo.prototype.constructor.name); // Foo
+      console.log(Foo.name === Foo.prototype.constructor.name); // true
+
+      var f = new Foo();
+      console.log(f.__proto__.constructor === Foo.prototype.constructor); // true
+      console.log(f.__proto__ === Foo.prototype); // true
+    </script>
+  </body>
+</html>
