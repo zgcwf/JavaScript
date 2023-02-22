@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. hasOwnProperty: 对象是否拥有某一个属于自己的属性(不是在原型上的属性)
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+
+      var info = Object.create(obj); // 创建一个新的对象info, info的隐式原型指向obj
+      console.log(info.__proto__); // {name: 'zgc', age: 18}
+      info.address = "中国";
+
+      console.log(info.hasOwnProperty("name")); // false
+      console.log(info.hasOwnProperty("address")); // true
+
+      // 2. in/for in操作符: 判断某个属性是否在某个对象或者对象的原型上面
+      console.log("name" in info); // true
+      console.log("name" in obj); // true
+      console.log("address" in info); // true
+      console.log("address" in obj); // false
+
+      // for in遍历对象不仅仅遍历自己对象的内容, 还有原型之上的内容
+      for (var key in info) {
+        console.log(key); // address name age
+      }
+
+      // 3. instanceof: 用于检测构造函数的prototype, 是否出现在某个实例对象的原型链上面
+      // instanceof用于判断对象(实例)和类(构造函数)之间的关系
+      function Student() {}
+      function Person() {}
+      function Foo() {}
+
+      function createObject(o) {
+        const F = function () {};
+        F.prototype = o;
+        return new F();
+      }
+
+      function inheritPrototype(subType, superType) {
+        subType.prototype = createObject(superType.prototype); //核心代码
+        Object.defineProperty(subType.prototype, "constructor", {
+          value: subType,
+          enumerable: false,
+          writable: true,
+          configurable: true,
+        });
+      }
+      inheritPrototype(Student, Person);
+      var stu = new Student();
+
+      console.log(stu instanceof Student); // true
+      console.log(stu instanceof Person); // true
+      console.log(stu instanceof Foo); // false
+      console.log(stu instanceof Object); // true
+      console.log(stu instanceof Array); // false
+
+      // 4. isPrototypeOf: 用于检测某个对象是否出现在某个实例对象的原型链上面
+      // isPrototypeOf是用来判断对象和对象之间的关系的
+      console.log(obj.isPrototypeOf(info)); // true, info的隐式原型指向obj
+      console.log(Student.prototype.isPrototypeOf(stu)); // true
+      console.log(Person.prototype.isPrototypeOf(stu)); // true
+    </script>
+  </body>
+</html>
