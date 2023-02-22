@@ -36,8 +36,9 @@
       var b1 = new Bar();
       console.log(f1, b1);
 
-      // 3. 类中的构造方法与实例方法
-      // 4. class类与构造函数的相同点
+      // 3. 类中的构造方法, 实例方法, 静态方法(类方法)
+      // 4. 静态方法通常用于定义直接使用类来执行的方法, 不需要有类的实例, 使用static关键字
+      // 5. class类与构造函数的相同点
       class Person {
         // 1. 类中的构造函数
         // 当我们通过new关键字调用一个类时, 默认调用class中的constructor方法
@@ -56,12 +57,20 @@
         eat() {
           console.log(this.name, "person.eat");
         }
+
+        // 3. 类中的静态方法
+        // 使用static关键字
+        // 在静态方法中是不能获取实例属性的状态（属性）的
+        static study() {
+          console.log(this, "Person.study");
+        }
       }
 
       var p1 = new Person("zgc", 18);
       console.log(p1);
       p1.run(); // zgc person.run
       p1.eat(); // zgc person.eat
+      Person.study(); // 这里的this指向Person类 Person.study
 
       // 而实例对象的原型指向Person.prototype, 实例方法定义在这里面
       console.log(p1.__proto__ === Person.prototype); // true
@@ -75,7 +84,7 @@
       console.log(Person.prototype.constructor); // 指向Person类
       console.log(typeof Baz, typeof Person); // function function
 
-      // 5. class类与构造函数的不同点
+      // 6. class类与构造函数的不同点
       // class类不能够作为普通函数调用
       // Baz()
       // Person() 报错
