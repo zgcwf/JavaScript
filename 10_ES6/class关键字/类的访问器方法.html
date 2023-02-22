@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name) {
+          // 程序员之间的约定: 以_开头的属性和方法, 不要在外界访问
+          this._name = name;
+        }
+
+        set name(value) {
+          // 设置name
+          this._name = value;
+        }
+
+        get name() {
+          // 获取name
+          return this._name;
+        }
+      }
+
+      var p1 = new Person("zgc");
+      p1.name = "wf";
+      console.log(p1.name); // wf
+
+      var p2 = new Person("cx");
+      console.log(p2.name); // cx
+
+      // 应用场景
+      class Rectangle {
+        constructor(x, y, width, height) {
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+        }
+
+        get position() {
+          return { x: this.x, y: this.y };
+        }
+
+        get size() {
+          return { width: this.width, height: this.height };
+        }
+      }
+
+      var r = new Rectangle(10, 10, 20, 50);
+      console.log(r.position, r.size); // {x: 10, y: 10} {width: 20, height: 50}
+    </script>
+  </body>
+</html>
