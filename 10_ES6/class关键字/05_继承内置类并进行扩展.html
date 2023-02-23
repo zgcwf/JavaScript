@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 创建一个新的类继承Array进行扩展
+      class MyArray extends Array {
+        // 当内部什么都不写时, MyArray 与 Array 功能一致
+
+        // 拓展:
+        // 获取数组最后一个元素
+
+        lastItem() {
+          return this[this.length - 1];
+        }
+
+        get firstItem() {
+          return this[0];
+        }
+      }
+
+      var arr = new MyArray(10, 20, 30, 40);
+      console.log(arr); // [10, 20, 30, 40]
+
+      console.log(arr.lastItem()); // 40
+      console.log(arr.firstItem); // 10
+
+      // 2. 直接对Array进行扩展
+      Array.prototype.secondItem = function () {
+        return this[1];
+      };
+      console.log(arr.secondItem()); // 20
+    </script>
+  </body>
+</html>
