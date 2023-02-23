@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 属性的增强
+      // 当对象中的属性值使用变量, 且属性值变量与属性名相同时, 可以简写
+      var name = "zgc";
+      var age = 18;
+      var obj = {
+        name,
+        age: age,
+      };
+
+      console.log(obj); // {name: 'zgc', age: 18}
+
+      // 2. 方法的增强
+      var info = {
+        foo: function () {
+          console.log(this);
+        }, // 会绑定this
+
+        rnning() {
+          // 是上一种方式的简写
+          console.log(this);
+        }, // 会绑定this
+
+        bar: () => {
+          console.log(this);
+        }, // 不会绑定this
+      };
+
+      info.bar(); // window
+      info.foo(); // info
+      info.rnning(); // info
+
+      // 3. 计算属性名
+      var key = "address";
+      var age = "my" + "Age";
+      var user = {
+        name: "zgc",
+        [key]: "广州",
+        [age]: 18,
+      };
+      console.log(user); // {name: 'zgc', address: '广州', myAge: 18}
+    </script>
+  </body>
+</html>
