@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 继承是多态的前提
+      class Shape {
+        getArea() {}
+      }
+
+      class Rectangle extends Shape {
+        constructor(width, height) {
+          super();
+          this.width = width;
+          this.height = height;
+        }
+
+        getArea() {
+          return this.width * this.height;
+        }
+      }
+
+      class Circle extends Shape {
+        constructor(radius) {
+          super();
+          this.radius = radius;
+        }
+
+        getArea() {
+          return this.radius * this.radius * 3.14;
+        }
+      }
+
+      var rect1 = new Rectangle(10, 20);
+      var rect2 = new Rectangle(5, 15);
+
+      var c1 = new Circle(10);
+      var c2 = new Circle(1);
+
+      // 多态: 同一操作作用于不同的对象，可以有不同的解释，产生不同的执行结果。
+      // 根据不同数据类型的实体提供了统一的接口, 或者使用一个单一的符号来表示多个不同的类型
+      // 即不同的数据类型进行同一种操作, 表现出不同的行为, 就是多态的体现
+      function getShapeArea(shape) {
+        console.log(shape.getArea());
+      }
+
+      getShapeArea(rect1); // 200
+      getShapeArea(rect2); // 75
+      getShapeArea(c1); // 314
+      getShapeArea(c2); // 3.14
+
+      // JS中到处都是多态
+      function sum(a, b) {
+        return a + b;
+      }
+
+      sum(10, 20);
+      sum("ab", "cd");
+
+      var foo = 123;
+      var foo = true;
+      var foo = [];
+    </script>
+  </body>
+</html>
