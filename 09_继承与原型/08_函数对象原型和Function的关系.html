@@ -26,6 +26,14 @@
 
       bar.info(); // info
       console.log(bar.msg); // Hello World
+
+      // Array
+      var arr = [1, 2, 3];
+      var arr1 = Array.prototype.slice.call(arr, 0, 2);
+      console.log(arr1); // [1, 2]
+
+      var arr2 = [].slice.apply(arr, [0, 2]);
+      console.log(arr2); // [1, 2]
     </script>
   </body>
 </html>
