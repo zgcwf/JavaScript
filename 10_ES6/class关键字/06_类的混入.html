@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // JS的类只支持单继承: 也就是只能有一个父类
+      // 那么在开发时需要在一个类中添加更多的相似功能, 可以使用混入(mixin)
+
+      // class A {
+      //   run() {
+      //     console.log("run", this);
+      //   }
+      // }
+      function A(classBase) {
+        return class extends classBase {
+          run() {
+            console.log("run", this === c1);
+          }
+        };
+      }
+      // class B {
+      //   eat() {
+      //     console.log("eat", this);
+      //   }
+      // }
+      //
+      function B(classBase) {
+        return class extends classBase {
+          eat() {
+            console.log("eat", this === c1);
+          }
+        };
+      }
+
+      class C {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        study() {
+          console.log("study", this === c1);
+        }
+      }
+
+      // 方式1:
+      // var CC = A(B(C));
+
+      // 方式2:
+      class CC extends A(B(C)) {}
+
+      var c1 = new CC("zgc", 18);
+
+      c1.run(); // run true
+      c1.study(); // study true
+      c1.eat(); // eat true
+    </script>
+  </body>
+</html>
