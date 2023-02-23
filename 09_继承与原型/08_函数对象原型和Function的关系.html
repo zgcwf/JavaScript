@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo() {}
+
+      console.log(foo.__proto__ === Function.prototype); // true
+
+      // 函数对象调用的某些方法都是在函数原型上面的
+      console.log(foo.apply === Function.prototype.apply); // true
+
+      // 在Function.prototype中添加的属性和方法可以被所有函数获取
+      Function.prototype.info = function () {
+        console.log("info");
+      };
+
+      Function.prototype.msg = "Hello World";
+
+      function bar() {}
+
+      bar.info(); // info
+      console.log(bar.msg); // Hello World
+    </script>
+  </body>
+</html>
