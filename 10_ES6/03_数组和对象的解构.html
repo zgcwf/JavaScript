@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      数组中解构赋值是按照变量的顺序来进行赋值的
+      对象是无序的，顺序是任意的, 变量必须与属性同名才能取到正确的值
+      如果解构失败，变量的值为undefined
+    */
+
+      // 1. 数组的解构
+      var names = ["zgc", "wf", "cx", "wlc"];
+
+      // 基本使用
+      var [name1, name2, name3] = names;
+      console.log(name1, name2, name3); // zgc wf cx
+
+      // 剩余数组
+      var [a, b, ...c] = names;
+      console.log(a, b, c); // zgc wf ['cx', 'wlc']
+
+      // 解构的默认值
+      var users = ["zgc", "wf", undefined, undefined];
+      var [x, y, z = "default", t] = users;
+      console.log(x, y, z, t); // zgc wf default undefined
+
+      // 2. 对象的解构
+      const zhao = {
+        name: "赵本山",
+        age: 66,
+        xiaopin: function () {
+          console.log("我可以演小品");
+        },
+      };
+
+      // 基本使用
+      var { name, age, xiaopin } = zhao;
+      console.log(name, age); // 赵本山 66
+      xiaopin(); // 我可以演小品
+
+      // 变量重命名
+      var { name, age: myAge } = zhao;
+      // console.log(age); // age is not defined
+      console.log(name, myAge); // 赵本山 66
+
+      // 默认值
+      var { address } = zhao;
+      console.log(address); // undefined
+
+      var { address = "广州" } = zhao;
+      console.log(address); // 广州
+
+      // 剩余对象
+      var info = {
+        userName: "赵本山",
+        age: 22,
+        address: "北京",
+      };
+      var { userName, ...b } = info;
+      console.log(userName, b); // 赵本山 {age: 22, address: '北京'}
+
+      // 3. 多重解构
+      var bar = {
+        type: {
+          title: "obj",
+          des: "对象",
+        },
+        list: ["a", "b"],
+      };
+
+      var {
+        type: { title, des: desc },
+        list: [list1, list2],
+      } = bar;
+
+      console.log(title, desc, list1, list2); // obj 对象 a b
+
+      // 4. 应用: 参数解构
+      var position = {
+        x: 10,
+        y: 20,
+      };
+      function foo1(position) {
+        console.log(position.x, position.y);
+      }
+
+      function foo2({ x, y }) {
+        console.log(x, y);
+      }
+
+      foo1(position); // 10 20
+      foo2(position); // 10 20
+    </script>
+  </body>
+</html>
