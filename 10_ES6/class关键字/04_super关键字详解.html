@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 在子类执行super.method(...)来调用一个父类的方法
+      // 2. 在子类构造方法执行super(...)来调用父类的constructor方法
+      // 3. 在子类的构造函数(constructor)中使用this或者返回默认对象之前, 必须先通过super调用父类构造函数
+      // 4. super的位置有三个: 子类构造方法, 实例方法, 静态方法
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        run() {
+          console.log("person.run", this);
+        }
+
+        eat() {
+          console.log("person.eat", this);
+        }
+
+        introduce() {
+          console.log("I am zgc");
+        }
+
+        static sleep() {
+          console.log("Person static sleep", this === Student);
+        }
+      }
+
+      class Student extends Person {
+        constructor(name, age, score) {
+          // 2. 在子类构造中执行super(...)来调用父类的constructor方法
+          super(name, age);
+          this.score = score;
+        }
+
+        // 子类对父类方法不满意, 重写父类方法
+        eat() {
+          console.log("stu.eat", this);
+        }
+
+        // 子类对父类方法部分满意, 拓展父类方法
+        introduce() {
+          // 1. 在子类执行super.method(...)来调用一个父类的方法
+          super.introduce();
+          console.log("I love you");
+        }
+
+        // 子类拓展父类静态方法
+        static sleep() {
+          super.sleep();
+          console.log("Student static sleep", this === Student);
+        }
+
+        study() {
+          console.log("stu.study", this);
+        }
+      }
+
+      var stu1 = new Student("zgc", 18, 98);
+      console.log(stu1);
+      stu1.run(); // person.run stu1
+      stu1.eat(); // stu.eat stu1
+
+      stu1.introduce();
+      // I am zgc
+      //I love you
+
+      // 子类同样会继承父类的静态方法
+      Student.sleep();
+      // Person static sleep true
+      // Student static sleep true
+    </script>
+  </body>
+</html>
