@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // let 和 const 没有作用域提升, var存在变量提升
+      console.log(msg); // undefined
+      var msg = "Hello World";
+
+      // console.log(address); //  Cannot access 'address' before initialization
+      // console.log(info); //  Cannot access 'info' before initialization
+      let address = "北京";
+      const info = {};
+
+      // 暂时性死区
+      // 在块级作用域中,变量需要先声明,然后再使用，在使用let/const命令声明变量之前,该变量都是不可用的，这被称为暂时性死区
+      // 从块作用域的顶部一直到变量声明完成之前, 这个变量处在暂时性死区
+      function foo() {
+        // ----- bar的暂时性死区
+        console.log("Hello World");
+        console.log("你好 世界");
+        // ------- bar的暂时性死区
+        let bar = "bar";
+        let baz = "baz";
+      }
+
+      // 暂时性死区和定义的位置没有关系, 和代码的执行顺序有关
+      function bar() {
+        console.log("user", user);
+      }
+
+      // console.log("user", user); // Cannot access 'user' before initialization
+      let user = "zgc";
+      bar(); // user zgc
+      console.log("user", user); // user zgc
+
+      // 暂时性死区形成之后, 在该区域内这个标识符不能访问
+
+      let test1 = "哈哈哈";
+      function baz1() {
+        console.log(test1);
+      }
+      baz1(); // 哈哈哈
+
+      let test2 = "哈哈哈";
+      function baz2() {
+        console.log(test2);
+        let test2 = "嘿嘿嘿";
+      }
+      // baz2(); // Cannot access 'test2' before initialization
+    </script>
+  </body>
+</html>

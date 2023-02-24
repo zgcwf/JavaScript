@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. let
+      //(1) 声明变量
+      let msg = "Hello World";
+      msg = "my name is zgc";
+      console.log(msg); // my name is zgc
+
+      //  批量批量声明变量
+      let b, c, d;
+
+      // 批量声明变量并赋值
+      // let f = 521, g = 'iloveyou', h = [];
+
+      //(2) 变量不能重复声明
+      // let star = '罗志祥';
+      // let star = '小猪'; // Identifier 'star' has already been declared
+
+      //(3) 块级作用域  全局, 函数, eval
+      // if else while for
+
+      // {
+      //     let girl = '周扬青';
+      // }
+      // console.log(girl); // girl is not defined
+
+      //(4) 不存在变量提升
+      // console.log(song);  // Cannot access 'song' before initialization
+      // let song = '恋爱达人';
+
+      //(5) 不影响作用域链
+      {
+        let school = "尚硅谷";
+        function fn() {
+          console.log(school);
+        }
+        fn(); // 尚硅谷
+      }
+
+      // 2. const
+      // (1) 声明常量
+      const SCHOOL = "尚硅谷";
+
+      // (2) 不允许重复声明
+      // const foo = () => {};
+      // const foo = () => {}; // Identifier 'foo' has already been declared
+
+      //(3) 声明一定要赋初始值
+      // const A; // Missing initializer in const declaration
+
+      //(4) 一般常量(字符串, 数字)使用大写(潜规则, 但可以不遵守)
+      // const NUM = 100;
+
+      //(5) 常量的值不能修改
+      // SCHOOL = 'ATGUIGU';  // Assignment to constant variable
+
+      //(6) 块级作用域
+      // {
+      //     const PLAYER = 'UZI';
+      // }
+      // console.log(PLAYER); // PLAYER is not defined
+
+      //(7) 对于数组和对象的元素修改(引用类型), 不算做对常量的修改, 不会报错
+      // 数组和对象是引用类型, 对数组和对象内部元素的修改不会改变它们的内存地址
+      const team = ["UZI", "MXLG", "Ming", "Letme"];
+      team.push("Meiko");
+      console.log(team); // ['UZI', 'MXLG', 'Ming', 'Letme', 'Meiko']
+
+      //(8) 不存在变量提升
+      // console.log(song);  // Cannot access 'song' before initialization
+      // const song = '恋爱达人';
+    </script>
+  </body>
+</html>
