@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // call
+      Function.prototype.myCall = function (context, ...args) {
+        // console.log(this); // 指向调用的函数对象
+        context = context === null || context === undefined ? window : Object(context);
+        context.fn = this; // this是调用call的函数
+        const result = context.fn(...args);
+        delete context.fn; // 执行后删除新增属性
+        return result;
+      };
+
+      // apply
+      Function.prototype.myApply = function (context, args = []) {
+        // console.log(this); // 指向调用的函数对象
+        context = context === null || context === undefined ? window : Object(context);
+        context.fn = this; // this是调用apply的函数
+        const result = context.fn(...args);
+        delete context.fn;
+        return result;
+      };
+
+      // bind
+      Function.prototype.myBind = function (context, ...args) {
+        // console.log(this); // 指向调用的函数对象
+        const _this = this;  
+        return function Bind(...newArgs) {
+          // 考虑是否此函数被继承
+          if (this instanceof Bind) {
+            // console.log(this); // this指向Bind实例对象
+            return _this.myApply(this, [...args, ...newArgs]);
+          }
+          return _this.myApply(context, [...args, ...newArgs]);
+        };
+      };
+
+      //测试用例
+      var message = "我的名字是";
+      var obj = {
+        message: "My name is: ",
+      };
+
+      function getName(firstName, lastName) {
+        console.log(this.message + " " + firstName + " " + lastName);
+        return 100;
+      }
+      console.log(getName("zgc", "zgc")); // 我的名字是 zgc zgc 100
+      console.log(getName.myCall(obj, "zgc", "wlc")); // My name is:  zgc wlc 100
+      getName.myApply(obj, ["zgc", "cx"]); // My name is:  zgc cx
+
+      let bind1 = getName.myBind(obj, "zgc", "wf");
+      bind1(); // My name is:  zgc wf
+
+      let bind2 = getName.myBind(obj, "zgc", "hl");
+      console.log(new bind2()); // undefined zgc hl
+
+    </script>
+  </body>
+</html>
