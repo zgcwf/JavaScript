@@ -10,6 +10,7 @@
     <script>
       function foo(age) {
         this.age = age;
+        // console.log(this.__proto__ === foo.prototype);
         console.log(this);
       }
 
@@ -28,7 +29,7 @@
 
       obj.foo.call(bar, 22); // this === bar, bar:{name: 'cx', age: 22}
 
-      // 3. new不可以和call/apply一起使用, 但绑定的优先级高于bind绑定
+      // 3. new不可以和call/apply一起使用, 但new绑定的优先级高于bind绑定
       var info = {
         name: "wlc",
       };
@@ -41,7 +42,8 @@
       };
 
       var test = obj.foo.bind(user);
-      var result = new test(18);
+      var result = new test(18); // this.__proto__ === foo.prototype
+      // new 以foo为构造函数创建一个新的空对象, 并将this指向这个空对象, 指向代码为其添加age属性
       console.log("result", result); // result {age: 18}
 
       // 4. bind的优先级高于 apply/call
