@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ES6 引入新的声明字符串的方式模板字符串
+
+      //1. 声明: ``
+      let msg = `我也是一个字符串哦!`;
+      console.log(msg, typeof msg); // 我也是一个字符串哦! string
+
+      //2. 内容中可以直接出现换行符
+      let str = `<ul>
+                    <li>沈腾</li>
+                    <li>玛丽</li>
+                    <li>魏翔</li>
+                    <li>艾伦</li>
+                </ul>`;
+
+      console.log(str);
+
+      //3. 可以通过${变量}来拼接内容
+      let lovest = "魏翔";
+      let out = `${lovest}是我心目中最搞笑的演员!!`;
+      console.log(out); // 魏翔是我心目中最搞笑的演员!!
+
+      function foo() {
+        return "foo";
+      }
+
+      // 4. 在${}中可以进行函数调用
+      console.log(`my function is ${foo()}`); // my function is foo
+
+      // 5. 标签模板字符串
+      /*
+       如果我们使用标签模板字符串, 并且在调用的时候插入其他的变量:
+          模板字符串会被拆分成数组
+          数组的第一个元素也是数组, 是被拆分的字符串组合(以${}为分隔符)
+          数组后面的元素是一个个${}传入的内容
+      */
+      function bar(...args) {
+        console.log("参数", args);
+      }
+
+      bar("zgc", 18, 1.88); // ['zgc', 18, 1.88]
+
+      const name = "wf";
+      const age = 22;
+      const height = 1.88;
+      bar`my name is ${name}, age is ${age}, height is ${height}`;
+    </script>
+  </body>
+</html>
