@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 为什么需要Symbol?
+      /*
+        在ES6之前, 对象的属性名都是字符串形式, 那么很容易造成冲突;
+        比如原来有一个对象, 我们希望在其中添加一个新的属性和值,
+        但是我们不确定它原来内部有什么内容的情况下, 很容易造成冲突, 从而覆盖掉它内部的某个属性;
+      */
+
+      // Symbol就是为了解决上面的问题, 用来生成一个独一无二的值
+      // Symbol值是通过Symbol函数来生成的, 生成后可以作为属性名
+      // 在ES6中, 对象的属性名可以使用字符串, 也可以使用Symbol值
+
+      // 1. 基本使用
+      const s1 = Symbol();
+      var obj = {
+        name: "zgc",
+        [s1]: "aaa",
+      };
+
+      const s2 = Symbol();
+      obj[s2] = "bbb";
+
+      console.log(obj);
+
+      // Symbol函数执行后, 每次创建出来的值都是独一无二的
+      console.log(s1 === s2); // false
+
+      // 2. 获取Symbol对应的key
+      // 这种方法获取不到Symbol对应的key
+      // console.log(Object.keys(obj)); // ['name']
+
+      console.log(Object.getOwnPropertySymbols(obj)); // [Symbol(), Symbol()]
+
+      const symbols = Object.getOwnPropertySymbols(obj);
+      for (let key of symbols) {
+        console.log(obj[key]); // aaa, bbb
+      }
+
+      // 3.  Symbol函数执行后, 每次创建出来的值都是独一无二的, 但我们可以通过 Symbol.for来创建相同的Symbol
+      const s3 = Symbol.for();
+      const s4 = Symbol.for();
+      console.log(s3 === s4); // true
+
+      // 4. 我们可以在创建Symbol值的时候传入一个描述desc
+      const s5 = Symbol("我是S5");
+      console.log(s5.description); // 我是S5
+      const s6 = Symbol(s5.description);
+      console.log(s5 === s6); // false
+
+      // 相同的desc, 可以用Symbol.for创建出相同的Symbol值
+      const s7 = Symbol.for("我是S7");
+      console.log(s7.description); // 我是S7
+      // console.log(Symbol.keyFor(s7)); // 我是S7
+
+      const s8 = Symbol.for(s7.description);
+      console.log(s7 === s8); // true
+
+      const s9 = Symbol.for("我是S9");
+      console.log(s8 === s9); // false
+    </script>
+  </body>
+</html>
