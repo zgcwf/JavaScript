@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      1.当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在栈中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变,都会导致另一个对象也发生变化;
+      2.浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址， 拷贝前后对象的基本数据类型互不影响，但拷贝前后对象的引用类型因共享同一块内存，会相互影响;
+      3.深拷贝是将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,拷贝前后的两个对象互不影响;
+      */
+
+      // 1. 引用赋值:
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+
+      var obj1 = obj;
+      obj1.name = "wf";
+      console.log(obj.name, obj1.name); // wf wf
+
+      // 2. 浅拷贝
+      var info = {
+        name: "zgc",
+        age: 18,
+        detail: {
+          height: 1.88,
+        },
+      };
+
+      const info1 = { ...info };
+      info1.name = "wlc";
+      info.detail.height = 2.22;
+
+      console.log(info.name, info1.name); // zgc wlc
+      console.log(info.detail.height, info1.detail.height); // 2.22 2.22
+
+      // 3. 深拷贝
+      var user = {
+        name: "zgc",
+        age: 18,
+        friend: {
+          height: 1.88,
+        },
+      };
+
+      const user1 = JSON.parse(JSON.stringify(user));
+      user.name = "cx";
+      user1.friend.height = 1.78;
+
+      console.log(user.name, user1.name); // cx zgc
+      console.log(user.friend.height, user1.friend.height); // 1.88 1.78
+    </script>
+  </body>
+</html>
