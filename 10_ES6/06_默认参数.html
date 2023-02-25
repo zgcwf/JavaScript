@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 函数的默认参数
+      // ES6 允许给函数参数赋值初始值
+
+      //1. 形参初始值 具有默认值的参数, 一般位置要靠后(潜规则)
+      // 注意: 默认参数会对undefined进行赋值, 但不会对null进行赋值
+      function add(a, b, c = 10) {
+        return a + b + c;
+      }
+      console.log(add(1, 2)); // 13
+      console.log(add(1, 2, undefined)); // 13
+      console.log(add(1, 2, null)); // 3
+
+      //2. 与解构赋值结合
+      const obj = { name: "zgc" };
+
+      // 解构赋默认值值
+      const { name = "wf", age = 18 } = obj;
+      console.log(name, age); // zgc 18
+
+      // 具有默认值的参数, 位置最好放在后面
+      // function connect(info = {}) { // 给参数一个默认值 {}
+      function connect({ port = 1101, host = "127.0.0.1" } = {}) { // 解构参数, 给解构属性一个默认值
+        console.log(host, port);
+      }
+      var info = {
+        host: "atguigu.com",
+        port: 3306,
+      };
+      connect(info); // atguigu.com 3306
+      connect(); // 127.0.0.1 1101
+
+      // 3. 具有默认参数的形参, 是不会计算在length之内的
+      // 并且之后所有的参数都不会计算在length之内
+      function foo1(name, age, height) {}
+      console.log(foo1.length); // 3
+
+      function foo2(name, age, height = 1.88) {}
+      console.log(foo2.length); // 2
+
+      function foo3(name, height = 1.88, age) {}
+      console.log(foo3.length); // 1
+
+      // 4. 如果默认参数与剩余参数一起出现, 默认参数放到剩余参数的前面
+      // 剩余参数本来也不会计算在length之内
+      function foo4(name, height = 1.78, ...args) {}
+      console.log(foo4.length); // 1
+    </script>
+  </body>
+</html>
