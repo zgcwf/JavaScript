@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+      //1. 数组的合并
+      const kuaizi = ["王太利", "肖央"];
+      const fenghuang = ["曾毅", "玲花"];
+      const newArr1 = kuaizi.concat(fenghuang);
+      const newArr2 = [...kuaizi, ...fenghuang];
+      console.log(newArr1, newArr2);
+
+      //2. 数组的浅拷贝
+      const sanzhihua = ["E", "G", "M"];
+      const sanyecao = [...sanzhihua]; //  ['E','G','M']
+      console.log(sanyecao);
+
+      //3. 将伪数组转为真正的数组
+      const divs = document.querySelectorAll("div");
+      const divArr = [...divs];
+      console.log(divArr);
+
+      // 4. 函数参数(展开数组或者字符串)
+      const names = ["zgc", "wf", "wlc", "cx"];
+      const str = "Hello";
+      function foo(name1, name2, ...args) {
+        console.log(name1, name2, args);
+      }
+
+      foo(...names); // zgc wf ['wlc', 'cx']
+      foo(...str); // H e ['l', 'l', 'o']
+
+      console.log(...str); // H e l l o
+
+      // 5. ES9之后可以在对象上使用扩展运算符
+      var obj = {
+        name: "zgc",
+        age: 18,
+      };
+
+      // 对象合并
+      const info = { ...obj, height: 1.88 };
+      console.log(info); // {name: 'zgc', age: 18, height: 1.88}
+
+      // 如果有同名属性 则后面的覆盖掉前面的
+      const user = { ...obj, name: "wf" };
+      console.log(user); // {name: 'wf', age: 18}
+
+      // 对象的浅拷贝
+      const newObj = { ...obj };
+      console.log(newObj); // {name: 'zgc', age: 18}
+    </script>
+  </body>
+</html>
