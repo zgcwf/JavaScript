@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const school = {
+        name: "尚硅谷",
+        cities: ["北京", "上海", "深圳"],
+        subject: ["前端", "Java", "大数据", "运维"],
+      };
+
+      //1. 获取对象所有的键
+      console.log(Object.keys(school)); // ['name', 'cities', 'subject']
+
+      //2. 获取对象所有的值
+      console.log(Object.values(school));
+      // ['尚硅谷', ["北京", "上海", "深圳"],["前端", "Java", "大数据", "运维"]]
+
+      //3. entries
+      const arr = Object.entries(school);
+      console.log("arr", arr);
+      // [['name', '尚硅谷'], ['cities', Array(3)], ['subject', Array(4)]
+
+      // 遍历
+      for (const item of arr) {
+        const [key, value] = item;
+        console.log(key, value);
+      }
+
+      // 也可以操作字符串/数组
+      console.log(Object.entries(["abc", "cba"])); // [['0', 'abc'],['1', 'cba']]
+      console.log(Object.entries("Hi")); // [['0', 'H'], ['1', 'i']]
+
+      //4. 获取对象所有属性的描述对象
+      console.log(Object.getOwnPropertyDescriptors(school));
+      /*
+      {
+      cities: {value: Array(3), writable: true, enumerable: true, configurable: true}
+      name: {value: '尚硅谷', writable: true, enumerable: true, configurable: true}
+      subject: {value: Array(4), writable: true, enumerable: true, configurable: true}
+      }
+      */
+
+      // ES6:
+      // 1. Object.is 比较两个值是否严格相等，与『===』行为基本一致（+0 与 NaN）；
+      console.log(Object.is(120, 120)); // true
+
+      // 注意下面的区别
+      console.log(Object.is(NaN, NaN)); // true
+      console.log(NaN === NaN); // false
+
+      console.log(Object.is(-0, +0)); // false
+      console.log(-0 === +0); // true
+
+      // NaN与任何数值做===比较都是false，跟他自己也如此！
+
+      // 2. Object.assign 对象的合并，将源对象的所有可枚举属性，复制到目标对象；
+      const config1 = {
+        host: "localhost",
+        port: 3306,
+        test: "test",
+      };
+      const config2 = {
+        host: "http://zgc.com",
+        port: 3003,
+        test2: "test2",
+      };
+      // 如果前边有后边没有则保 ，如果前后都有，后面的会覆盖前面的
+      const info = Object.assign(config1, config2);
+      console.log(info);
+      // {host: 'http://zgc.com', port: 3003, test: 'test', test2: 'test2'}
+    </script>
+  </body>
+</html>
