@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  Object.fromEntries(), 将Object.entries生成的数组转回对象
+      const obj = {
+        name: "zgc",
+        age: 18,
+        friend: ["wf", "cx"],
+      };
+      const result = Object.entries(obj);
+      console.log(result); // [['name', 'zgc'], ['age', 18], ['friend', ['wf', 'cx']]]
+
+      const reverse = Object.fromEntries(result);
+      console.log(reverse); // {name: 'zgc', age: 18, friend: ["wf", "cx"]}
+
+      // 应用
+      const search = "?name=zgc&age=18&height=1.78";
+      const params = new URLSearchParams(search);
+
+      console.log(params.get("name")); // zgc
+      console.log(params.get("age")); // 18
+
+      for (const item of params.entries()) {
+        console.log(item);
+      }
+      // ['name', 'zgc']
+      // ['age', '18']
+      // ['height', '1.78']
+
+      const paramObj = Object.fromEntries(params.entries());
+      console.log(paramObj); // {name: 'zgc', age: '18', height: '1.78'}
+    </script>
+  </body>
+</html>
