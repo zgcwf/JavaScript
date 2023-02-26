@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Array.prototype.flat 与 flatMap
+
+      // flat: 将多维数组转换成低维数组
+
+      // 将二维数组转换成一维数组
+      const arr = [1, 2, 3, [4, 5], 6, 7];
+      console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7]
+
+      // 将三维数组转换成二维数组
+      const arr2 = [1, 2, 3, [4, 5, [6, 7]], 8, 9];
+      console.log(arr2.flat()); // [1, 2, 3, 4, 5, [6, 7], 8, 9]
+
+      // 将三维数组转换成一维数组
+      console.log(arr2.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+      // 将n维数组转换成一维数组
+      // arr.flat(n-1)
+
+      // flatMap
+      // 对数组先进行map操作, 在进行flat操作
+      // flatMap中flat的深度为1
+      const arr3 = [1, 2, 3, 4, 5];
+      const result1 = arr3.map((item) => item * 10);
+      console.log(result1); // [10, 20, 30, 40, 50]
+
+      const result2 = arr3.map((item) => [item * 10]);
+      console.log(result2); // [[10], [20], [30], [40], [50]]
+
+      const result3 = arr3.flatMap((item) => [item * 10]);
+      console.log(result3); // [10, 20, 30, 40, 50]
+
+      // 应用: 以空格为标准切割字符串且放入数组
+      // 1. for of
+      const message = ["Hello World", "你好 zgc"];
+      const strArr = [];
+      for (let item of message) {
+        // console.log(item); // Hello World
+        const infos = item.split(" ");
+        // console.log(infos); // ['Hello', 'World']
+        for (let info of infos) {
+          strArr.push(info);
+        }
+      }
+      console.log(strArr); // ['Hello', 'World', '你好', 'zgc']
+
+      // 2. map 与 flat
+      const mapArr = message.map((item) => item.split(" "));
+      console.log(mapArr); // [['Hello', 'World'], ['你好', 'zgc']]
+      console.log(mapArr.flat()); // ['Hello', 'World', '你好', 'zgc']
+
+      // 3. flatMap
+      const flatArr = message.flatMap((item) => item.split(" "));
+      console.log(flatArr); // ['Hello', 'World', '你好', 'zgc']
+    </script>
+  </body>
+</html>
