@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. Map的基本使用
+
+      // 创建一个空 map
+      let m = new Map();
+
+      // 1. size 返回 Map 的元素个数；
+      console.log(m.size); // 0
+
+      // 2. set 增加/修改一个新元素，返回当前 Map；
+      // 添加
+      m.set("皇帝", "大哥");
+      m.set("丞相", "二哥");
+      const obj = { name: "zgc" };
+      m.set(obj, "wf");
+      console.log(m); // {'皇帝' => '大哥', '丞相' => '二哥', {…} => 'wf'}
+
+      // 修改
+      console.log(m.set("皇帝", "父亲")); // {'皇帝' => '父亲', '丞相' => '二哥', {…} => 'wf'}
+
+      // 3. get 返回键名对象的键值；
+      console.log(m.get("皇帝")); // 父亲
+      console.log(m.get(obj)); //  wf
+
+      // 4. has 检测 Map 中是否包含某个元素，返回 boolean 值；
+      console.log(m.has("皇帝"));
+
+      // 5. delete, 删除元素，返回 boolean 值
+      const result = m.delete(obj);
+      console.log(result, m); // true  {'皇帝' => '父亲', '丞相' => '二哥'}
+
+      // 5. clear 清空集合，返回 undefined；
+      const result1 = m.clear();
+      console.log(result1, m); // undefined {size: 0}
+
+      // 6. forEach
+      let m2 = new Map([
+        ["皇帝", "大哥"],
+        ["丞相", "二哥"],
+        [obj, "wf"],
+      ]);
+      console.log("m2", m2);
+      m2.forEach((item, index) => console.log(item, index));
+      // 父亲 皇帝
+      // 二哥 丞相
+      // wf { name: "zgc" }
+
+      // 7. for of
+
+      for (let item of m2) {
+        console.log(item);
+      }
+      // ['皇帝', '大哥']
+      // ['丞相', '二哥']
+      // [{name: 'zgc'}, 'wf']
+
+      for (let item of m2) {
+        const [key, value] = item;
+        console.log(key, value);
+      }
+      // 皇帝 大哥
+      // 丞相 二哥
+      // {name: 'zgc'} 'wf'
+    </script>
+  </body>
+</html>

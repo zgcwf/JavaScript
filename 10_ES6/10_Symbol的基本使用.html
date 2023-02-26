@@ -15,7 +15,7 @@
         但是我们不确定它原来内部有什么内容的情况下, 很容易造成冲突, 从而覆盖掉它内部的某个属性;
       */
 
-      // Symbol就是为了解决上面的问题, 用来生成一个独一无二的值
+      // Symbol就是为了解决上面的问题, 用来生成一个独一无二的值, 它是JavaScript 语言的第七种数据类型
       // Symbol值是通过Symbol函数来生成的, 生成后可以作为属性名
       // 在ES6中, 对象的属性名可以使用字符串, 也可以使用Symbol值
 
@@ -46,6 +46,12 @@
       }
 
       // 3.  Symbol函数执行后, 每次创建出来的值都是独一无二的, 但我们可以通过 Symbol.for来创建相同的Symbol
+      /*
+      它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。
+      如果有，就返回这个 Symbol 值，否则就新建一个以该字符串为名称的 Symbol 值，
+      并将其注册到全局。
+      
+      */
       const s3 = Symbol.for();
       const s4 = Symbol.for();
       console.log(s3 === s4); // true
@@ -66,6 +72,20 @@
 
       const s9 = Symbol.for("我是S9");
       console.log(s8 === s9); // false
+
+      /*
+      Symbol.for()与Symbol()这两种写法，都会生成新的 Symbol。
+      它们的区别是，前者会被登记在全局环境中供搜索，后者不会。
+      Symbol.for()不会每次调用就返回一个新的 Symbol 类型的值，
+      而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。
+      比如，如果你调用Symbol.for("cat")30 次，每次都会返回同一个 Symbol 值，
+      但是调用Symbol("cat")30 次，会返回 30 个不同的 Symbol 值。
+      */
+
+      // 5. 不能与其他数据进行运算
+      // let result = s + 100;
+      // let result = s > 100;
+      // let result = s + s;
     </script>
   </body>
 </html>

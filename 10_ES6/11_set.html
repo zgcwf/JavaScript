@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 一. Set的基本使用
+      // 创建Set
+      let s = new Set();
+      console.log(s, typeof s);
+
+      // 添加元素
+      let s1 = new Set(["大哥", "二哥", "三哥", "四哥", "三哥"]);
+      console.log(s1); // 自动去重 {'大哥', '二哥', '三哥', '四哥'}
+
+      // 1. size 返回集合的元素个数；
+      console.log(s1.size); // 4
+
+      // 2. add 增加一个新元素，返回当前集合；
+      let s2 = s1.add("大姐");
+      console.log("s2", s2, s1);
+      // {'大哥', '二哥', '三哥', '四哥', '大姐'} {'大哥', '二哥', '三哥', '四哥', '大姐'}
+
+      // 3. delete 删除元素，返回 boolean 值；
+      let result = s1.delete("三哥");
+      console.log("result", result); // true
+      console.log("s3", s1); // {'大哥', '二哥', '四哥', '大姐'}
+
+      // 4. has 检测集合中是否包含某个元素，返回 boolean 值；
+      let s4 = s1.has("二姐");
+      console.log("s4", s4); // false
+
+      // 5. clear 清空集合，返回 undefined；
+      let s5 = s1.clear();
+      console.log("s5", s5, s1); // undefined {}
+
+      // 5.forEach 遍历
+      let s6 = new Set(["大哥", "二哥", "三哥", "四哥", "三哥"]);
+      s6.forEach((item, index) => console.log(item, index));
+      // 大哥 大哥
+      // 二哥 二哥
+      // 三哥 三哥
+      // 四哥 四哥
+
+      // 6. for of
+      for (let v of s6) {
+        console.log(v); // 大哥, 二哥, 三哥, 四哥
+      }
+
+      // 二. Set应用
+      let arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+
+      //1. 数组去重
+      // let result1 = [...new Set(arr)];
+      let result1 = Array.from(new Set(arr));
+      console.log(result1);
+
+      //2. 交集
+      let arr2 = [4, 5, 6, 5, 6];
+      // let intersection = [...new Set(arr)].filter((item) => {
+      //   let s2 = new Set(arr2); // 4 5 6
+      //   if (s2.has(item)) {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // });
+
+      let intersection = [...new Set(arr)].filter((item) =>
+        new Set(arr2).has(item)
+      );
+      console.log(intersection);
+
+      //3. 并集
+      let union = [...new Set([...arr, ...arr2])];
+      console.log(union);
+
+      //4. 差集
+      let diff = [...new Set(arr)].filter((item) => !new Set(arr2).has(item));
+      console.log(diff);
+    </script>
+  </body>
+</html>
