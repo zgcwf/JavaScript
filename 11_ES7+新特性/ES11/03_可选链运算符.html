@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 可选链操作符 ?.
+
+      // 1. 在 ES5 访问对象的深嵌套属性时obj.a.b，首先需要检查它的上一个属性是否存在，然后才能获取属性的值，否则就会报错
+      let obj1 = {};
+      console.log(obj1.a); //undefined
+      // console.log(obj1.a.b); // => undefined.b 会报错
+
+      // 2. ES5中借助 && 来保证程序的健壮性，但当嵌套的对象很深时，则要对每一层进行验证，这样不利于阅读，而且容易出现程序上的错误
+      var obj2 = {};
+      var b = obj2.a && obj2.a.b;
+      console.log(b); // undefined
+
+      // 3. 可选链操作符使用  ?.  来表示，可以判断操作符之前属性是否有效，从而链式读取对象的属性或返回 undefined 。
+      const config = {
+        db: {
+          host: "192.168.1.100",
+        },
+        friend: {
+          name: "zgc",
+          run: function () {
+            console.log("run");
+          },
+        },
+      };
+
+      // 传统写法
+      // const dbHost = config && config.db && config.db.host;
+      // 可以直接 config.db.host，如果数据都存在那和上面的没区别，但如果有一个数据不存在就报错
+
+      // 可选链操作符对象写法
+      console.log(config?.db?.host); // 192.168.1.100
+      console.log(config.db.name); // undefined
+      // console.log(config.user.name); // Cannot read properties of undefined (reading 'name')
+
+      // 传统写法
+      if (config && config.friend && config.friend.run) {
+        config.friend.run(); // run
+      }
+
+      // 可选链操作符函数写法
+      config?.friend?.run?.(); // run
+
+      // 可选链访问数组元素
+      var arr = [];
+      console.log(arr?.[5]); // undefined
+    </script>
+  </body>
+</html>
