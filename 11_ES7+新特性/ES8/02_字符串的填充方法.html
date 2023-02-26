@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // padStart padEnd
+      var a = "9".padEnd(2, "4");
+      var b = "7".padStart(3, "0");
+      console.log(a, b); // 94 007
+
+      // 对时间进行格式化
+      var minute = "5";
+      var second = "36";
+      console.log(`${minute}:${second}`); //5:36
+
+      var minute = "5".padStart(2, "0");
+      var second = "36".padStart(2, "0");
+      console.log(`${minute}:${second}`); //05:36
+
+      // 敏感数据格式化:身份证/银行卡
+      const cardNum = "370782200410160225";
+      const lastNum = cardNum.slice(-4);
+      const result = lastNum.padStart(cardNum.length, "*");
+      console.log(result); // **************0225
+    </script>
+  </body>
+</html>
