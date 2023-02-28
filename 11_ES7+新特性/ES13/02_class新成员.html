@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        // 实例属性:
+        // punlic 公共属性
+        height = 1.88;
+
+        // 私有的属性, 但这是属于程序员直接的约定, 其实还是可以被访问的
+        _intro = "my name is why";
+
+        // 私有的属性, Person类外界无法访问
+        #intro = "my name is why";
+
+        // 类属性(静态属性):
+        // 无法通过实例访问
+        static total = '70亿'
+
+        // 私有的类属性
+        static #maleTotal = '40亿'
+
+        constructor(name, age) {
+          // 对象的属性: 在constructor中通过this来设置的
+          this.name = name;
+          this.age = age;
+          this.address = "北京";
+        }
+
+        // 静态代码块
+        static {
+          console.log('在第一次加载解析类的时候就会执行');
+          console.log('仅执行一次');
+        }
+      }
+
+      const p1 = new Person("zgc", 18);
+      console.log(p1.address, p1.name, p1.age, p1.height, p1._intro); // 北京 zgc 18 1.88 my name is why
+      // console.log(p1.#intro); // Property '#intro' is not accessible outside class 'Person' because it has a private identifier.
+
+      console.log(p1.total); // undefined
+      console.log(Person.total); // '70亿'
+      // console.log(Person.#maleTotal); // Property '#maleTotal' is not accessible outside class 'Person' because it has a private identifier.
+    </script>
+  </body>
+</html>

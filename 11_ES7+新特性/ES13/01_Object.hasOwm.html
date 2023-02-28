@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // obj.hasOwnProperty: 判断对象上是否拥有某属性或者方法
+      const obj = {
+        name: "zgc",
+        age: 18,
+        foo: function () {},
+      };
+      console.log(obj);
+      obj.__proto__.address = "北京";
+      obj.__proto__.bar = function () {};
+      console.log(obj.age, obj.address); // 18 '北京'
+
+      console.log(obj.hasOwnProperty("age")); // true
+      console.log(obj.hasOwnProperty("address")); // false
+      console.log(obj.hasOwnProperty("foo")); // true
+      console.log(obj.hasOwnProperty("bar")); // false
+
+      // Object.hasOwn(对象, 属性/方法名): 用来代替obj.hasOwnProperty
+      console.log(Object.hasOwn(obj, "name")); // true
+      console.log(Object.hasOwn(obj, "address")); // false
+      console.log(Object.hasOwn(obj, "foo")); // true
+      console.log(Object.hasOwn(obj, "bar")); // false
+    </script>
+  </body>
+</html>

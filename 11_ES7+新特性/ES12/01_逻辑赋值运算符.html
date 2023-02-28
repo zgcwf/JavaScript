@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 赋值运算符
+      let count = 100;
+      count = count + 50;
+      count += 100;
+
+      // 逻辑赋值运算符
+      function foo(msg) {
+        //  ||
+        // msg = msg || "默认值";
+        // msg ||= "默认值";
+
+        // ??
+        // msg = msg ?? "默认值";
+        msg ??= "默认值";
+        console.log(msg);
+      }
+
+      foo("and"); // and
+      foo(); // 默认值
+
+      // &&
+      var obj = {
+        name: "zgc",
+        foo: function () {},
+      };
+
+      // obj = obj && obj.foo()
+      obj &&= obj.foo();
+    </script>
+  </body>
+</html>
