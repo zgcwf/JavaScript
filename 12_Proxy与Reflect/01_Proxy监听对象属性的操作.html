@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "zgc",
+        age: 18,
+        height: 1.88,
+      };
+
+      // 需求:监听对象属性的所有操作
+
+      // 方式一: Object.defineProperty
+      const keys = Object.keys(obj);
+      for (let key of keys) {
+        // console.log(key);
+        let value = obj[key];
+        Object.defineProperty(obj, key, {
+          get: function () {
+            // console.log(`监听: 获取${key}的值`);
+            return value;
+          },
+          set(newVal) {
+            // console.log(`监听: 设置${key}的值`, newVal);
+            value = newVal;
+          },
+        });
+      }
+
+      // console.log(obj.name); // zgc
+      // obj.name = "wf";
+      // console.log(obj.name); // wf
+
+      // 方式二: Proxy代理对象
+      // 首先, 我们需要new Proxy对象 并且传入需要侦听的对象(target)以及一个处理对象(handler)
+      // const p = new Proxy(target, handler)
+      // 其次, 我们之后的操作都是对Proxy的操作, 而不是原有的对象
+      var info = {
+        name: "wlc",
+        age: 24,
+        height: 1.88,
+      };
+
+      // 如果我们想要侦听某些具体的操作, 那么就可以在handler中添加对应的捕捉器(Trap):
+      const infoProxy = new Proxy(info, {
+        // 获取对象属性:
+        get: function (target, property, receiver) {
+          // target: 侦听的对象, property: 被获取的属性key, receiver: 调用的代理对象
+          console.log(target, property, receiver);
+          return target[property];
+        },
+        // 设置对象属性值/添加对象属性
+        set: function (target, property, value, receiver) {
+          // target: 侦听的对象, property: 被设置的属性key, value: 新属性值, receiver: 调用的代理对象
+          console.log(target, property, value, receiver);
+          target[property] = value;
+        },
+        // 删除对象属性
+        deleteProperty: function (target, property) {
+          // target: 侦听的对象, property: 被获取的属性key
+          console.log(target, property);
+          delete info.height;
+        },
+        // 判断属性是否在对象中
+        has: function (target, property) {
+          // target: 侦听的对象, property: 被获取的属性key
+          console.log(target, property);
+          return property in target;
+        },
+      });
+
+      console.log(infoProxy.age); // 24
+      infoProxy.age = 20;
+      console.log(infoProxy.age); // 20
+
+      // 添加新属性
+      infoProxy.address = "北京";
+      console.log(info, infoProxy);
+      // {name: 'wlc', age: 20, height: 1.88, address: '北京'}  {name: 'wlc', age: 20, height: 1.88, address: '北京'}
+
+      // 删除对象属性
+      delete infoProxy.height;
+      console.log(info, infoProxy);
+      // {name: 'wlc', age: 20, address: '北京'} {name: 'wlc', age: 20, address: '北京'}
+
+      // 判断属性是否在对象中
+      console.log("age" in infoProxy); // true
+      console.log("height" in infoProxy); // false
+    </script>
+  </body>
+</html>
