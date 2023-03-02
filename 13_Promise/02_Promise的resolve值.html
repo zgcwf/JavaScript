@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var obj = {
+        name: "zgc",
+        then: function (resolve) {
+          resolve("哈哈哈");
+        },
+      };
+      const promise = new Promise((resolve, reject) => {
+        // 1. 如果传入的参数为非Promise类型的值, 返回的结果为成功promise对象(掌握)
+        // resolve传入的普通值,就是then函数中res参数接收的数据
+        resolve([
+          { name: "zgc", age: 18 },
+          { name: "wf", age: 24 },
+        ]);
+
+        // 2. 如果传入的参数为 Promise 对象, 则返回的 promise 对象的状态由传入的 Promise 决定(理解)
+        // new Promise中resolve/reject传入的普通值,就是then/catch函数中参数接收的数据
+        // resolve(
+        //   new Promise((resolve, reject) => {
+        //     // resolve("yes");
+        //     reject("no");
+        //   })
+        // );
+
+        // 3. 如果传入的是一个对象, 且对象内部有实现then方法, 那么就会执行该then方法, 并且根据then方法的结果来决定Promise的状态(了解)
+        // resolve(obj)
+      });
+
+      console.log("promise", promise);
+
+      promise
+        .then((res) => {
+          console.log("res:", res);
+        })
+        .catch((err) => {
+          console.log("err:", err);
+        });
+    </script>
+  </body>
+</html>
