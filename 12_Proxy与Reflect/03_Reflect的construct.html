@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 创建一个Student类型的对象
+
+      // 方式一: 借用构造函数
+      // function Person(name, age) {
+      //   this.name = name;
+      //   this.age = age;
+      // }
+
+      // function Student(name, age) {
+      //   Person.apply(this, [name, age]);
+      // }
+
+      // const stu = new Student("zgc", 18);
+      // console.log(stu);
+
+      // 方式二: 反射
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      function Student() {}
+
+      const stu = Reflect.construct(Person, ["wf", 22], Student);
+      console.log(stu); // Student {name: 'wf', age: 22}
+      console.log(stu.__proto__ === Student.prototype); // true
+    </script>
+  </body>
+</html>
