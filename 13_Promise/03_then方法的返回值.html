@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const promise = new Promise((resolve, reject) => {
+        resolve([
+          { name: "zgc", age: 18 },
+          { name: "wf", age: 24 },
+        ]);
+      });
+
+      console.log("promise", promise);
+
+      // then方法返回的也是一个promise对象
+      // 所以我们可以定义promise对象进行链式调用
+      /*
+        > 当then方法的回调函数本身在执行时, 那么返回的promise对象处在pending状态
+        > 当then方法的回调函数return一个结果时, 那么它处在fulfilled/resolved状态, 并且会将结果作为新Promise的resolve的参数(默认是undefined)
+          > 正常数据
+          > promise对象
+        > 当then方法抛出一个异常时, 那么它处于reject状态
+      */
+      const result = promise
+        .then((res) => {
+          console.log("res1:", res);
+          return res[0];
+        })
+        .then((res) => {
+          console.log("res2:", res);
+          return res.name;
+        })
+        .then((res) => {
+          console.log("res3:", res);
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("success");
+            }, 2000);
+          });
+        })
+        .then((res) => {
+          console.log("res4:", res);
+          return new Promise((resolve, reject) => {
+            reject("fail");
+          });
+        })
+        .catch((err) => {
+          console.log("err:", err);
+        });
+
+      console.log("result", result);
+    </script>
+  </body>
+</html>
