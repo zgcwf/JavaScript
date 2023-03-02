@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. Promise.resolve
+      // Promise.resolve("Hello World");
+
+      // 相当于
+
+      // new Promise((resolve, reject) => {
+      //   resolve("Hello World");
+      // });
+
+      // 2. Promise.reject
+      //  Promise.reject("reject err")
+
+      // 相当于
+
+      // new Promise((resolve, reject) => {
+      //   reject("reject err");
+      // });
+
+      // 3. Promise.all: 返回一个新的 promise，只有所有的 promise 都成功才成功，只要有一个失败了就直接失败
+      /*
+        当所有的Promise状态变成fulfilled时, 新Promise的状态为fulfilled, 并且会将所有Promise的返回值组成一个数组, 
+        数组结果的顺序与Promise.all（[数组]）的顺序一致。,当有一个Promise的状态为reject时, 
+        新Promise的状态为reject, 并且会将第一个reject的返回值作为结果
+      */
+      const p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ name: "zgc", age: 18 });
+          // reject({ name: "zgc", age: 18 });
+        }, 1000);
+      });
+
+      const p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ name: "wf", age: 24 });
+          // reject({ name: "wf", age: 24 });
+        }, 2000);
+      });
+      const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // resolve("success");
+          reject("fail");
+        }, 3000);
+      });
+
+      const promise = Promise.all([p1, p2, p3]);
+      console.log("promise", promise);
+
+      promise
+        .then((res) => {
+          console.log("res1", res);
+          // [{ name: "zgc", age: 18 }, { name: "wf", age: 24 }, success ];
+        })
+        .catch((err) => {
+          console.log("err", err); // fail
+        });
+
+      // 4. Promise.race: 返回一个新的 promise，第一个完成的 promise 的结果状态就是最终的结果状态
+      // Promise.race()只会得到(打印)第一个返回的结果，但其余结果也会返回(不打印)。 谁先完成就输出谁(不管是成功还是失败)
+
+      const result = Promise.race([p1, p2, p3]);
+      console.log("result", result);
+      result
+        .then((res) => {
+          console.log("res2", res); // { name: "zgc", age: 18 }
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+
+      // 5. Promise.allSettled: 解决all方法的缺陷
+      /*
+          all方法有一个缺陷, 当有一个Promise状态变为reject时, 新Promise就会立即变成对应的reject状态,
+          那么对于resolve的, 以及依然处于pending状态的promise, 我们是获取不到对应结果的;
+
+          allSettled方法会在所有的promise都有结果(无论是fulfilled还是rejected)才会有最终的状态,
+          并且这个状态一定是fulfilled的;
+        */
+
+      const allSettled = Promise.allSettled([p1, p2, p3]);
+      console.log("allSettled", allSettled);
+
+      allSettled.then((res) => {
+        console.log("res3", res);
+      });
+
+      // 6. any: 和race方法类似, 但是会等到第一个成功的结果
+      // 会等到一个fulfilled状态, 才会决定新Promise的状态
+      // 如果所有的Promise都是reject的, 那么也会等到所有的Promise都变成rejected状态
+
+      const any = Promise.any([p1, p2, p3]);
+      console.log("any", any);
+
+      any
+        .then((res) => {
+          console.log("res4", res);
+        })
+        .catch((err) => {
+          // 当所有的Promise都是reject时, 返回的结果不是任何一个reject的参数, 而是一条错误信息
+          console.log("err", err); // err AggregateError: All promises were rejected
+        });
+    </script>
+  </body>
+</html>
