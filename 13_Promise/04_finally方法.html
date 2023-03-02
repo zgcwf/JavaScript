@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // finally表示Promise对象无论状态变为fulfilled/resolved还是rejected, 都会被执行
+
+      const promise = new Promise((resolve, reject) => {
+        resolve([
+          { name: "zgc", age: 18 },
+          { name: "wf", age: 24 },
+        ]);
+      });
+
+      promise
+        .then((res) => {
+          console.log("res", res);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        })
+        .finally(() => {
+          console.log('finall在哪种状态都会被调用');
+        });
+    </script>
+  </body>
+</html>
