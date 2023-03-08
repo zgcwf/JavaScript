@@ -60,28 +60,6 @@
       // delete操作符
       delete person.name;
       console.log(person);
-
-      // 3. 方括号的使用
-      // 点符号要求key是有效的变量标识符,不能包含空格, 不能以数字开头, 也不能包含某些特殊字符, 这个时候我们可以使用[]
-
-      var message = "Hello World";
-      var info = {
-        name: "zgc",
-        age: 29,
-        "my friend": "wf",
-        "paly games": function () {
-          console.log("games");
-        },
-        [message]: "你好, 世界",
-      };
-
-      console.log(info.name === info["name"]); //true
-      console.log(info["my friend"]); // wf
-      info["paly games"](); // games
-
-      var play = "paly games";
-      info[play](); // games
-      console.log(info[message]); // 你好, 世界
     </script>
   </body>
 </html>

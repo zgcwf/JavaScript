@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Iterator: 迭代器
+      const names = ["zgc", "wf", "cx", "wlc"];
+
+      // 给数组names模拟一个迭代器对象
+      function mockIterator(arr) {
+        let index = 0;
+        return {
+          // next方法: 一个无参数或者一个参数的函数, 返回一个带有done/value的对象
+          next: function () {
+            // done: boolean值, 为false时表示尚未迭代完成, value: 具体值/undefined, 当done为turue时可以省略
+            return index < arr.length
+              ? { done: false, value: arr[index++] }
+              : { done: true };
+          },
+        };
+      }
+      const NIterator = mockIterator(names);
+      console.log(NIterator.next());
+      console.log(NIterator.next());
+      console.log(NIterator.next());
+      console.log(NIterator.next());
+      console.log(NIterator.next());
+      // for (let i = 0; i < names.length; i++) {
+      //   console.log(NIterator.next());
+      // }
+    </script>
+  </body>
+</html>

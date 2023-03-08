@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 数组/字符串/Set/Map内部有默认的迭代器, 本身就是可迭代的
+      // 可迭代对象必然有一个函数名为[Symbol.iterator]的方法
+      var arr = [10, 2, 3, 4, 5]; //数组是一个可迭代对象
+      console.log(arr);
+
+      // 使用for..of..来遍历迭代器
+      for (var v of arr) {
+        console.log(v); // 10  2  3  4  5
+      }
+
+      //也可以使用ES6提供的next()方法手工遍历
+      var it = arr[Symbol.iterator](); // 调用可迭代对象的Symbol.iterator方法可以获取默认迭代器，将迭代器引用赋给it变量
+      console.log(it.next().value); // 10
+      console.log(it.next().value); // 2
+      console.log(it.next().value); // 3
+
+      // 2. 将info变成一个可迭代对象(迭代info中的friends)
+      /*
+        > 1. 必须实现一个特定的函数: [Symbol.iterator]
+        > 2. 这个函数必须返回一个迭代器对象(用于迭代当前的对象)
+      */
+      const info = {
+        friends: ["wf", "cx", "wlc"],
+        // 计算属性名: []
+        [Symbol.iterator]() {
+          let index = 0;
+          return {
+            next: () => {
+              return index < this.friends.length
+                ? { done: false, value: this.friends[index++] }
+                : { done: true };
+            },
+          };
+        },
+      };
+
+      const FIterator = info[Symbol.iterator]();
+
+      console.log(FIterator.next()); // {done: false, value: 'wf'}
+      console.log(FIterator.next()); // {done: false, value: 'wf'}
+      console.log(FIterator.next()); // {done: false, value: 'WLC'}
+      console.log(FIterator.next()); // {done: true}
+      console.log(FIterator.next()); // {done: true}
+
+      // 3. 将infos变成一个可迭代对象(迭代infos中的key/value)
+      const infos = {
+        name: "zgc",
+        age: 18,
+        friends: ["wf", "cx", "wlc"],
+        [Symbol.iterator]: function () {
+          // const keys = Object.keys(this); // 得到key
+          const values = Object.values(this); // 得到value
+          // const entries = Object.entries(this) // 得到key/value数组
+          let index = 0;
+          const iterator = {
+            next: function () {
+              return index < values.length
+                ? { done: false, value: values[index++] }
+                : { done: true };
+            },
+          };
+          return iterator;
+        },
+      };
+
+      // 4. 改造的对象支持for...of遍历(对象原本是不支持的)
+
+      for (const item of infos) {
+        console.log(item); // zgc 18  ["wf", "cx", "wlc"]
+      }
+
+      const obj = {
+        friends: ["wf", "cx", "wlc"],
+      };
+
+      // for (const item of obj) {
+      //   console.log(item); // obj is not iterable
+      // }
+    </script>
+  </body>
+</html>

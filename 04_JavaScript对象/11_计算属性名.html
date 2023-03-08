@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 对象方括号的使用(计算属性)
+      // 点符号要求key是有效的变量标识符,不能包含空格, 不能以数字开头, 也不能包含某些特殊字符, 这个时候我们可以使用[]
+      // 这个时候我们可以使用[]来定义计算属性, 我们甚至可以在[]中书写表达式：
+      var message = "Hello World";
+      var info = {
+        name: "zgc",
+        age: 29,
+        "my friend": "wf",
+        "paly games": function () {
+          console.log("games");
+        },
+        [message]: "你好, 世界",
+      };
+
+      console.log(info.name === info["name"]); //true
+      console.log(info["my friend"]); // wf
+      info["paly games"](); // games
+
+      var play = "paly games";
+      info[play](); // games
+      console.log(info[message]); // 你好, 世界
+
+      var foo = {
+        [info.name]() {
+          console.log("info.name", info.name);
+        },
+      };
+
+      foo["zgc"](); // info.name zgc
+      foo[info.name](); // info.name zgc
+    </script>
+  </body>
+</html>
