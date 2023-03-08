@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 定义生成器函数
+      function* foo(text) {
+        const age = 18;
+        console.log("执行内部代码1", text);
+        const next2 = yield;
+        console.log("执行内部代码2", next2);
+        const next3 = yield "zgc";
+        // return "zgc";
+        console.log("执行内部代码3", next3);
+        yield age;
+        console.log("执行内部代码4");
+      }
+
+      // 2. 调用生成器函数, 得到生成器对象
+      const generator = foo("第一次执行yield");
+
+      // 3. 生成器函数的内部next是有返回值的
+      // 当yield全部执行完成之后的下一次调用next, done值变为true, value为undefined
+      // console.log(generator.next()); // {value: undefined, done: false}
+      // console.log(generator.next()); // {value: 'zgc', done: false}
+      // console.log(generator.next()); // {value: 18, done: false}
+      // console.log(generator.next()); // {value: undefined, done: true}
+
+      // 4. 在中间直接进行return, 表示迭代已经完成, 后续代码无任何意义
+      // 返回结果后done值变为true, 后续所有的done值也都变为true且value为undefined
+      // console.log(generator.next()); // {value: undefined, done: false}
+      // console.log(generator.next()); // {value: 'zgc', done: true}
+      // console.log(generator.next()); // {value: undefined, done: true}
+
+      // 5. 给函数每次执行传入参数
+      // 每个next传入的参数可以作为上一个yield的返回值拿变量进行接收
+      // 但第一个yield比较特殊, 无法从next传入参数, 因为第一个yield没有上一个yield接收它的参数
+      // 所有第一个yield想要传入的参数往往在函数调用时传入
+      console.log(generator.next());
+      console.log(generator.next("第二次执行yield"));
+      console.log(generator.next("第三次执行yield"));
+      console.log(generator.next());
+    </script>
+  </body>
+</html>

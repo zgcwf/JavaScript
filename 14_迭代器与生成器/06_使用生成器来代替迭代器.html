@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const names = ["zgc", "wf", "cx", "wlc"];
+
+      // 1. 数组自带的迭代器
+      const defaultIterator = names[Symbol.iterator]();
+      // console.log(defaultIterator.next());
+      // console.log(defaultIterator.next());
+      // console.log(defaultIterator.next());
+      // console.log(defaultIterator.next());
+      // console.log(defaultIterator.next());
+
+      // 2. 给数组names模拟一个迭代器对象
+      function mockIterator(arr) {
+        let index = 0;
+        return {
+          // next方法: 一个无参数或者一个参数的函数, 返回一个带有done/value的对象
+          next: function () {
+            // done: boolean值, 为false时表示尚未迭代完成, value: 具体值/undefined, 当done为turue时可以省略
+            return index < arr.length
+              ? { done: false, value: arr[index++] }
+              : { done: true };
+          },
+        };
+      }
+      const NIterator = mockIterator(names);
+      // console.log(NIterator.next());
+      // console.log(NIterator.next());
+      // console.log(NIterator.next());
+      // console.log(NIterator.next());
+      // console.log(NIterator.next());
+
+      // 3. 使用生成器来代替迭代器
+
+      // 生成器函数的返回值是一个特殊的迭代器
+      function* Gfoo(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          yield arr[i];
+        }
+      }
+
+      const GIterator = Gfoo(names);
+      console.log(GIterator.next()); // {value: 'zgc', done: false}
+      console.log(GIterator.next()); // {value: 'wf', done: false}
+      console.log(GIterator.next()); // {value: 'cx', done: false}
+      console.log(GIterator.next()); // {value: 'wlc', done: false}
+      console.log(GIterator.next()); // {value: undefined, done: false}
+
+      // 4. 我们可以通过 yield*简化上面写法
+      // yield*是一种yield的语法糖, 只不过会依次迭代一个可迭代对象, 每次迭代其中的一个值
+      function* Gbar(arr) {
+        yield* arr;
+      }
+
+      const GIterator2 = Gbar(names);
+      console.log(GIterator2.next());
+      console.log(GIterator2.next());
+      console.log(GIterator2.next());
+      console.log(GIterator2.next());
+      console.log(GIterator2.next());
+    </script>
+  </body>
+</html>

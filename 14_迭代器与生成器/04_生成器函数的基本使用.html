@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        - 生成器函数需要在`function`的后面加一个符号: `*`
+        - 生成器函数可以通过`yield`关键字来控制函数的执行流程
+        - 生成器函数的`返回值是一个Generaor(生成器)`, 不会执行函数内部的代码
+             - 生成器事实上是一种特殊的迭代器
+             - 要想执行函数内部的代码, 需要返回的生成器对象(Generaor)调用它的next方法
+             - 当遇到yield时中断执行, 想要继续执行需要再次调用next方法
+      */
+
+      // 1. 定义生成器函数
+      function* foo() {
+        console.log(1);
+        console.log(2);
+        yield;
+        console.log(3);
+        console.log(4);
+        yield;
+        console.log(5);
+      }
+
+      // 2. 调用生成器函数, 得到生成器对象
+      const generator = foo();
+
+      // 3. 调用生成器对象的next方法执行函数内部代码
+      generator.next(); // 1 2
+      generator.next(); // 3 4
+      generator.next(); // 5
+    </script>
+  </body>
+</html>
