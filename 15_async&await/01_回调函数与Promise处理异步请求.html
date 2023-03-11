@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 回调函数写法:
+      // 当面临回调函数嵌套调用(外部回调函数异步执行的结果是嵌套的回调执行的条件)时,容易形成回调地狱
+      function request1(url, callback) {
+        setTimeout(() => {
+          callback(url);
+        }, 2000);
+      }
+
+      function getData1() {
+        request1("zgc", (res1) => {
+          console.log("res1", res1);
+          request1(res1 + "wf", (res2) => {
+            console.log("res2", res2);
+            request1(res2 + "cx", (res3) => {
+              console.log("res3", res3);
+            });
+          });
+        });
+      }
+
+      getData1();
+
+      // 2. promise 链式调用
+      // 解决回调地狱的问题
+      function request2(url) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(url);
+          }, 2000);
+        });
+      }
+
+      function getData2() {
+        request2("zgc")
+          .then((res1) => {
+            console.log("res1", res1);
+            return request2(res1 + "wf");
+          })
+          .then((res2) => {
+            console.log("res2", res2);
+            return request2(res2 + "wlc");
+          })
+          .then((res3) => {
+            console.log("res3", res3);
+          });
+      }
+
+      getData2();
+    </script>
+  </body>
+</html>
