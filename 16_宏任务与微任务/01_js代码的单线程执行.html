@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log("开始");
+
+      let name = "zgc";
+      name = "wf";
+
+      function bar() {
+        console.log("bar开始");
+        // 1. 由js线程执行, 会阻塞
+        let total = 0;
+        for (let i = 0; i < 10000; i++) {
+          total += 1;
+        }
+        console.log("total", total);
+
+        // 2. 定时器
+        // 不是js线程执行, 而是浏览器执行的, 不会阻塞
+        setTimeout(() => {
+          console.log("setTimeout");
+        }, 3000);
+
+        console.log("bar结束");
+      }
+
+      function foo() {
+        console.log("foo开始");
+        bar();
+        console.log("foo结束");
+      }
+
+      foo();
+      console.log("结束");
+    </script>
+  </body>
+</html>
