@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 函数遇到throw之后, 后面的代码都不会执行
+      // 2. throw 抛出一个具体的错误信息
+      function foo() {
+        console.log("foo");
+        // 1. 字符串
+        // throw 'error'
+
+        // 2. 对象
+        // throw {
+        //   errMessage: "我是错误信息",
+        //   errCode: 101101,
+        // };
+
+        // 3. 系统提供的类
+        // 一般只传入第一个参数就可以了
+        throw new Error("我是错误信息");
+
+        console.log("foo结束");
+      }
+
+      // 当函数出现异常时, 会将异常抛给自己的调用者
+      // 如果调用者没有进行处理, 那么异常会继续向外抛
+      // 如果抛到全局还是没有进行处理, 异常就会抛给浏览器, 控制台报错, 后续代码终止执行
+      // 捕获异常: try{ //正常代码 } catch(err){ //处理异常 }
+      function bar() {
+        try {
+          foo();
+          console.log('try执行');
+        } catch (err) { // ES10中, 如果不打算使用参数err, 则小括号可以省略
+          // new Error()抛出的异常, 有三个属性
+          console.log('catch执行');
+          console.log("err", err);
+          console.log(err.message, err.name);
+          console.log(err.stack);
+        } finally {
+          console.log('不论有没有异常都会执行');
+        }
+        console.log("bar");
+      }
+
+      function test() {
+        bar();
+        console.log("test");
+      }
+
+      test();
+      console.log("-------");
+    </script>
+  </body>
+</html>
