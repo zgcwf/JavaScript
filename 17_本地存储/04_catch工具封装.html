@@ -20,14 +20,13 @@
       const info = "My name is wf";
 
       localCache.setCache("user", user);
-      console.log(localCache.getCache('user'));;
+      console.log(localCache.getCache("user"));
 
       sessionCache.setCache("info", info);
-      console.log(sessionCache.getCache("info"));;
+      console.log(sessionCache.getCache("info"));
 
-      console.log(sessionCache.getCache("msg"));;
-
-
+      localCache.setCache("test", 1);
+      console.log(localCache.getCache("test"));
     </script>
   </body>
 </html>

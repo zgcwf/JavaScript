@@ -10,15 +10,16 @@ class Cache {
   }
 
   setCache(key, value) {
-    this.storage.setItem(key, JSON.stringify(value));
+    if (!value) return confirm("请检查要缓存的数据");
+    if (key) this.storage.setItem(key, JSON.stringify(value));
   }
 
   getCache(key) {
-    return JSON.parse(this.storage.getItem(key));
+    if (key) return JSON.parse(this.storage.getItem(key));
   }
 
   removeCache(key) {
-    this.storage.removeItem(key);
+    if (key) this.storage.removeItem(key);
   }
 
   clearCache() {
@@ -28,4 +29,3 @@ class Cache {
 
 const localCache = new Cache("local");
 const sessionCache = new Cache("session");
-
