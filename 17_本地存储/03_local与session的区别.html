@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="./test.html">页面内跳转</a>
+    <a href="./test.html" target="_blank">页面外跳转</a>
+
+    <script>
+      // 验证一: 关闭网页(复制当前网页地址, 注释掉 1.1, 1.2的代码, 在新的网页打开)
+      // 1.1 localStorage的存储保持
+      // localStorage.setItem("name", "localStorage");
+
+      // 1.2 sessionStorage的存储会消失
+      // sessionStorage.setItem("name", "sessionStorage");
+
+      // 结论一: 关闭当前网页后重写打开, localStorage的存储保持, sessionStorage的存储会消失
+
+      // 验证二: 在页面内实现跳转
+      // 1.1 localStorage的存储保持
+      // localStorage.setItem("info", "localStorage");
+
+      // 1.2 sessionStorage的存储也会保持
+      // sessionStorage.setItem("info", "sessionStorage");
+
+      // 结论二: 在页面内实现跳转, localStorage的存储保持, sessionStorage的存储也会保持
+
+      // 验证三: 在页面外跳转
+      // 1.1 localStorage的存储保持
+      localStorage.setItem("key", "localStorage");
+
+      // 1.2 sessionStorage的存储不会保留
+      sessionStorage.setItem("key", "sessionStorage");
+
+      // 结论三: 在页面外实现跳转, localStorage的存储保持, sessionStorage的存储不会保留
+    </script>
+  </body>
+</html>

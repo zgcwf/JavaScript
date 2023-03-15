@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 若不动态地加载或是显式地添加“defer”或“async”属性，script标签将按照在页面上的出现顺序进行加载, 无论是外部脚本还是内联脚本都将这样进行处理。 -->
+    <script src="./cache.js"></script>
+    <script>
+      const user = {
+        name: "zgc",
+        age: 18,
+      };
+
+      const msg = "Hello World";
+
+      const info = "My name is wf";
+
+      localCache.setCache("user", user);
+      console.log(localCache.getCache('user'));;
+
+      sessionCache.setCache("info", info);
+      console.log(sessionCache.getCache("info"));;
+
+      console.log(sessionCache.getCache("msg"));;
+
+
+    </script>
+  </body>
+</html>
