@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. ^ 和 $ 在正则表达式中被称为锚点
+      // ^: 匹配文本开头, $: 匹配文本末尾
+
+      const msg = "My Name Is zgc.";
+
+      // 字符串方法(区分大小写)
+      if (msg.startsWith("my")) {
+        console.log("以my开头"); // false
+      }
+
+      if (msg.endsWith("zgc.")) {
+        console.log("以zgc.结尾"); // true
+      }
+
+      // 正则匹配
+      if (/^my/gi.test(msg)) {
+        console.log("以my开头"); // true
+      }
+
+      if (/zgc\.$/gi.test(msg)) {
+        // \. 使用了转义
+        console.log("以zgc.结尾"); // true
+      }
+
+      const re1 = /^coder$/; // 必须一个不差
+      const re2 = /^cod.*er$/; // 想要在中间插入其他字符
+
+      const info1 = "coder";
+      const info2 = "codxxer";
+
+      console.log(re1.test(info1)); // true
+      console.log(re1.test(info2)); //false
+      console.log(re2.test(info2)); // true
+
+      // 2. 词边界 \b: 检查某一字符串是否处于词边界
+      // 即检测某一字符串的一侧是否匹配 \w
+
+      const txt = "My Username Is zgc";
+
+      console.log(/name/gi.test(txt)); // true
+      console.log(/\bname\b/gi.test(txt)); // false, txt字符串的name左边是User, 匹配 \w, 不处于词边界
+      console.log(/\bname\b/gi.test(msg)); // true, msg字符串的name左右是空格, 不匹配 \w 处于词边界
+
+      // 3. 词边界应用: 匹配所有的时间
+      const time = "now time is 11:56, 12:00 eat food, number is 123:456";
+      const timeRe = /\b\d\d:\d\d\b/gi;
+      console.log(time.match(timeRe));
+    </script>
+  </body>
+</html>

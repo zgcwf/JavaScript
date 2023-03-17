@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 正则匹配规则工具大全: https://c.runoob.com/front-end/854/
+
+      // 1. 正则表达式是一种字符串匹配机制, 而已用来搜索, 获取, 代替字符串
+
+      // 2. 在JS中, 正则表达式使用RegExp类来创建, 也可以使用字面量创建
+      // 2.1 RegExp类: new RegExp(匹配规则, 修饰符)
+      const re1 = new RegExp("hello", "i");
+
+      // 2.2 字面量: /匹配规则/修饰符
+      const re2 = /hello/i;
+
+      // 3. 正则表达式的初体验
+      // 需求1: 将所有的abc替换成cba(忽略大小写)
+      const msg = "abcd00 1Abcd ABc23d ABC456d 789ABCD";
+
+      // 传统字符串方法
+      const msg1 = msg.replaceAll("abc", "cba");
+      console.log("msg1", msg1); // 失败, 只能替换第一个, 无法忽视大小写
+
+      // 正则表达式
+      const msg2 = msg.replaceAll(/abc/gi, "cba");
+      console.log("msg2", msg2); // 成功, /abc/:查找abc字符串, i: 忽略大小写, g: 就是匹配全部可匹配结果
+
+      // 需求2: 将所有的数字删除
+      // 正则表达式
+      const msg3 = msg.replace(/\d+/g, "");
+      console.log("msg3", msg3); // 成功, \d 匹配数字类型, +: 一个或者多个, g: 就是匹配全部可匹配结果
+
+    </script>
+  </body>
+</html>

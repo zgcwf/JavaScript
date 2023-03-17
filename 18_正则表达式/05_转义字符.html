@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 如果要把特殊的字符作为常规的字符使用, 需要对其进行转义: 在前面加上反斜杠 \
+      const re1 = /./gi; // .字符: 与除换行符之外的任何字符匹配
+      const re2 = /\./gi; // 进行转义: 匹配 字符串中的 .
+      const msg = "abc.def";
+      console.log(msg.match(re1)); // ['a', 'b', 'c', '.', 'd', 'e', 'f']
+      console.log(msg.match(re2)); // ['.']
+      console.log(re1.test(msg)); // true
+      console.log(re2.test(msg)); // false
+
+      // 常见需要转义的字符: [],\, ^, $, ., /, |, ?, *, +, ()
+
+      // 应用: 获取所有的js/jsx后缀的文件名
+      const fileNames = ["abc.html", "abc,css", "abc.js", "xyz.jsx", "def.js"];
+
+      const re = /\.jsx?$/gi; // 使用变量承载时不要轻易使用 g, 同一实例多次调用lastIndex会改变 
+
+      const arr1 = fileNames.filter((item) => re.test(item));
+
+      const arr2 = fileNames.filter((item) => /\.jsx?$/i.test(item));
+      console.log(arr1, arr2);
+    </script>
+  </body>
+</html>

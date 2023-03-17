@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 量词: 描述字符串匹配的数量 {n}
+      // 确切的数量: {5}, 匹配5个字符
+      // 描述范围:{3,7}, 匹配3到7个字符
+      // 注意: 这里的,后面千万不要加空格
+
+      // 匹配字符串中3到5个a
+      const msg = "abdaajsjaaasaaaahdfaaaaajkgdfaaaaaa";
+      console.log(msg.match(/a{3,5}/gi));
+
+      // +: 代表 1个 或者 多个, 相当于 {1,}
+      // ?: 代表 0个 或者 1个, 相当于{0,1}, 它使得符号变得可选
+      // *: 代表 0个 或者 多个, 相当于{0,}, 这个字符可以不出现或者多次出现
+      console.log(msg.match(/a+/gi))
+      // 案例: 匹配开始结束标签
+      const el = "<div><i>哈哈哈</i></div><h1>呵呵呵</h1>";
+      const tagRe = /<\/?[a-z][a-z0-9]*>/gi;
+
+      const res = el.match(tagRe);
+      console.log(res);
+    </script>
+  </body>
+</html>

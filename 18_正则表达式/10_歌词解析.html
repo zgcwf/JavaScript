@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 进行歌词格式转化
+      // line: [00:31.160]如果场景里出现一架钢琴 ==>{time: 16280, content: 'あんなに愛した君がいない'}
+      const lyricString = "[00:00.000] 作词 : 许嵩\n[00:01.001] 作曲 : 许嵩\n[00:03.010]天青色等烟雨\n[00:05.100]而我在等你\n[00:07.11]这其实不是许嵩的歌\n";
+
+      // 用正则表达式匹配前面的时间[00:31.160], 毫秒可能是两位 00:00:12 = 00:00:120
+      const parseExp = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+
+      function parseLyric(lyricStr) {
+        const lyricArr = lyricStr.split("\n");
+        // console.log("将字符串切割成数组:", lyricArr);
+        const lyrics = [];
+        for (const line of lyricArr) {
+          if (line) {
+            const result = parseExp.exec(line);
+            // console.log("result", result);
+            // 如果这一次没有匹配到，则跳过这一次进行下一次匹配
+            if (!result) continue;
+            const minuteTime = result[1] * 60 * 1000;
+            const secondTime = result[2] * 1000;
+            const msTime = result[3].length === 3 ? result[3] * 1 : result[3] * 10;
+            const time = minuteTime + secondTime + msTime;
+            // replace方法：用后面的值取代前面的值，trim：去掉空格
+            const content = line.replace(parseExp, "").trim();
+            lyrics.push({ time: time, content: content });
+          }
+        }
+        return lyrics;
+      }
+
+      const lyricInfo = parseLyric(lyricString)
+      console.log(lyricInfo);
+    </script>
+  </body>
+</html>

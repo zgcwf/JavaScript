@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // JS中的正则表达式被用于 RegExp 的 exec, test方法
+      // 也包括 字符串 的 match, matchAll, replace, replaceAll, search, split方法
+      // i: 忽略大小写, g: 就是匹配全部可匹配结果
+      // 如果你不带g,在正则过程中，字符串是从左至右匹配的，如果匹配成功就不再继续向右匹配了，如果你带g,它会重头到尾的把正确匹配的字符串挑选出来
+
+      // 1. 使用正则对象上的实例方法
+      // 1.1 test: 检测某一个字符串是否符合正则的规则, 返回值是布尔类型
+      /*
+        如果正则表达式设置了 g，test() 的执行会改变正则表达式 lastIndex属性。连续的执行test()方法，后续的执行将会从 lastIndex 处开始匹配字符串
+        即在相同的全局正则表达式实例上多次调用test将会越过之前的匹配
+        但如果只执行一次, 加上g与不加g是一样的
+     */
+      const re1 = /abc/gi;
+      const msg1 = "abcd00 1Abcd ABc23d ABC456d 789ABCD";
+
+      const re2 = /^abxc$/gi;
+      const msg2 = "aBxc";
+      if (re1.test(msg1)) {
+        console.log("msg字符串中包含abc, 符合规则");
+      }
+
+      if (re2.test(msg2)) {
+        console.log("msg字符串以a开头, 以c结尾, 中间包含bx, 符合规则");
+      }
+
+      // 1.2 exec: 使用正则执行字符串, 匹配成功返回一个数组, 没有匹配成功则返回null
+      // 不加入g，则只返回第一个匹配，无论执行多少次均是如此，如果加入g，则第一次执行也返回第一个匹配，再执行返回第二个匹配，依次类推。
+      const res1 = re1.exec(msg1);
+      console.log("res1", res1);
+
+      // 2. 使用字符串方法, 传入一个正则表达式
+      // 2.1 match: 匹配字符串中符合正则条件的子字符串, 并以数组形式返回, 没有匹配成功则返回null
+      // 不加入g，也只是返回第一个匹配，一直执行match方法也总是返回第一个匹配，加入g，则一次返回所有的匹配
+      const res2 = msg1.match(re1);
+      console.log("res2", res2);
+
+      // 2.2 matchAll: 得到一个迭代器, 里面包含匹配到的字符串的详情
+      // 传入的正则修饰符必须加g, 否则报错
+      const res3 = msg1.matchAll(re1);
+      console.log("res3", res3);
+      for (const item of res3) {
+        console.log("item", item);
+      }
+
+      // 2.3 replace: 替换
+      // 表达式不加入g，则只替换第一个匹配，如果加入g，则替换所有匹配
+      const res4 = msg1.replace(/abc/gi, "cba");
+      console.log("res4", res4);
+
+      // 2.4 replaceAll: 全部替换
+      // 传入的正则修饰符必须加g, 否则报错
+      const res5 = msg1.replaceAll(/\d+/g, "");
+      console.log("res5", res5);
+
+      // 2.5 split: 以正则为分隔符切割字符串, 返回一个数组
+      // 加上g与不加g是一样的
+      const res6 = msg1.split(re1);
+      console.log("res6", res6, msg1);
+
+      // 2.6 search 搜索字符串, 返回匹配到的位置索引, 失败时返回-1
+      // 加不加g也是一样的
+      const res7 = msg1.search(re1);
+      console.log("res7", res7);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 字符类: 是一种特殊的符号, 匹配特定集中的任何符号
+      const msg = "abc 1234dfg567u io890MM";
+
+      // 1.1  \d(digit) 匹配数字类型(匹配一个从 0 到 9 的字符)
+      const re1 = /\d\d/gi;
+      const res1 = msg.match(re1);
+      console.log("res1", res1);
+
+      // 1.2 \s(space) 匹配空格字符, 包括 空格, 制表符\t, 换行符\n和其他少数稀有字符\v, \f, \r等
+      const re2 = /\s/gi;
+      const res2 = msg.match(re2);
+      console.log("res2", res2);
+
+      // 1.3 \w(word) 匹配单字字符: 数字或下划线_或拉丁字母(a-z,A-Z),
+      const re3 = /\w/gi;
+      const res3 = msg.match(re3);
+      console.log("res3", res3);
+
+      // 1.4 .字符: 与除换行符之外的任何 **一个** 字符匹配
+      const re4 = /./gi;
+      const res4 = msg.match(re4);
+      console.log("res4", res4);
+
+      // 2. 反向类
+      // 2.1 \D: 匹配除了 \d 之外的任意字符
+      // 2.2 \S  匹配除了 \s 之外的任意字符
+      // 2.3 \W  匹配除了 \w 之外的任意字符
+    </script>
+  </body>
+</html>

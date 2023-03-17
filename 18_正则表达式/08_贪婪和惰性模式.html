@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const msg = "我最喜欢的三个游戏: <仁王2> 与 <文明VI> 以及 <泰拉瑞亚>";
+
+      // 1. 贪婪:
+      /*
+       ^ 正则表达式通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符, 这被称为贪婪匹配。
+       ^ 比如这个表达式：a.*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。
+      */
+
+      // 正常使用量词默认是贪婪模式:
+
+      // *	重复任意次，但尽可能少重复
+      // +	重复1次或更多次，但尽可能少重复
+      // ?	重复0次或1次，但尽可能少重复
+      // {n,m} 重复n到m次，但尽可能少重复
+      // {n,}	重复n次以上，但尽可能少重复
+
+      const re1 = /<.+>/gi;
+      const res1 = msg.match(re1);
+      console.log("res1", res1);
+
+      // 2. 惰性:
+      /*
+       ^ 懒惰匹配，也就是匹配尽可能少的字符, 在能使整个匹配成功的前提下使用最少的重复;
+       ^ a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）;
+       ^ 为什么第一个匹配是aab（第一到第三个字符）而不是ab（第二到第三个字符）？
+       ^ 简单地说，因为正则表达式有一条比懒惰／贪婪规则优先级更高的规则，就是：最先开始的匹配拥有最高的优先权;
+      */
+
+      // 在量词后加?启用惰性:
+
+      //*?	重复任意次，但尽可能少重复
+      // +?	重复1次或更多次，但尽可能少重复
+      // ??	重复0次或1次，但尽可能少重复
+      // {n,m}?	重复n到m次，但尽可能少重复
+      // {n,}?	重复n次以上，但尽可能少重复
+      const re2 = /<.+?>/gi;
+      const res2 = msg.match(re2);
+      console.log("res2", res2);
+    </script>
+  </body>
+</html>

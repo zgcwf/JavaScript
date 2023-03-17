@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 得到时间戳
+      const time = new Date().getTime();
+      console.log("time", time);
+
+      // 商品信息
+      const productInfo = {
+        name: "iPhone",
+        newPrice: 7999,
+        oldPrice: 8999,
+        endTime: time,
+      };
+
+      // 进行时间格式化
+      // yyyy/MM/dd hh:mm:ss
+      // yyyy-MM-dd hh:mm:ss
+      // ...
+      function formatDate(time, formatStr) {
+        let date = new Date(time);
+        // console.log("date", date);
+
+        const obj = {
+          "y+": date.getFullYear(),
+          "M+": date.getMonth() + 1,
+          "d+": date.getDate(),
+          "h+": date.getHours(),
+          "m+": date.getMinutes(),
+          "s+": date.getSeconds(),
+        };
+
+        for (const key in obj) {
+          if (new RegExp(key).test(formatStr)) {
+            const value = (obj[key] + "").padStart(2, "0");
+            formatStr = formatStr.replace(new RegExp(key), value);
+          }
+        }
+
+        return formatStr;
+      }
+
+      console.log(formatDate(productInfo.endTime, "yyyy-MM-dd hh:mm:ss"));
+      console.log(formatDate(productInfo.endTime, "yyyy年-MM月-dd日 hh:mm:ss"));
+      console.log(formatDate(productInfo.endTime, "hh:mm:ss yyyy/MM/dd "));
+
+    </script>
+  </body>
+</html>
