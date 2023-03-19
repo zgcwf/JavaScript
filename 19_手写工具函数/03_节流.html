@@ -7,9 +7,42 @@
     <title>Document</title>
   </head>
   <body>
+    <input class="search" />
     <script>
       // 函数节流侧重于一段时间内只执行一次。
-    
+      //传入的两个参数一个为函数，一个函数执行为间隔时间
+      function throttle(fn, interval) {
+        let start = 0;
+        const _throttle = function (...args) {
+          //获取当前时间戳
+          let now = new Date().getTime();
+          if (now - start >= interval) {
+            //当前时间减去上一次时间大于间隔时间函数执行
+            fn.apply(this, args);
+            start = now;
+          }
+        };
+        return _throttle;
+      }
+    </script>
+
+    <script>
+      // 1. 获取输入框
+      let search = document.querySelector(".search");
+
+      // 2. 定义一个监听函数
+      function searchChange(e, name) {
+        console.log(this, e.target.value, name);
+      }
+
+      // 3. 对searchChange处理
+      let _searchChange = throttle(searchChange, 3000);
+
+      // 4. 绑定oninput
+      // search.addEventListener("input", _searchChange);
+      search.oninput = function (e) {
+        _searchChange.call(search, e, "zgc");
+      };
     </script>
   </body>
 </html>
