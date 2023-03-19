@@ -39,8 +39,44 @@
       for (var item of arr) {
         console.log(item); // // "zgc" "wf" "wlc" "cx"
       }
-      
-      // 
+
+      // 4.4 for...in 与 for...of的区别
+      // 遍历数组:
+      let test = ["a", "b", "c"];
+
+      Array.prototype.ufo = "张三";
+
+      for (let item in test) {
+        console.log(item);
+      }
+      // 输出 0 1 2 ufo
+      // for…in 遍历数组会返回数组中所有可枚举的属性名, 包括原型链上可枚举的属性(下标值)；
+
+      for (let item of test) {
+        console.log(item);
+      }
+      // 输出 a b c
+      // for…of 遍历数组返回数组的下标对应的属性值；
+
+      // 遍历对象:
+      const info = {
+        a: 1,
+        b: 2,
+        c: 3,
+      };
+
+      info.__proto__.username = "zgc";
+
+      for (let i in info) {
+        console.log(i);
+      } 
+      // 输出: a b c username
+      // for…in 遍历对象会返回对象的所有可枚举的键名
+
+      // for (let i of info) {
+      //   console.log(i);
+      // }
+      // for…of 遍历对象报错；
     </script>
   </body>
 </html>

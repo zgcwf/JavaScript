@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function deepClone(data) {
+        if (data && typeof data === "object") {
+          const clone = Array.isArray(data) ? [] : {};
+          for (const key in data) {
+            // for in来遍历对象的键名，同时也会遍历到原型方法和属性，可以通过hasOwnPropery方法判断某个值是该对象的属性还是实例属性
+            if (data.hasOwnProperty(key)) {
+              data[key] && typeof data[key] === "object"
+                ? (clone[key] = deepClone(data[key]))
+                : (clone[key] = data[key]); //如果是对象就递归调用，否则直接返回
+            }
+          }
+          return clone;
+        }
+        return data;
+      }
+
+      // 测试用例1:
+      obj = {
+        x: 1,
+        y: [5, 6, 7],
+        z: {
+          a: 0,
+          b: 1,
+        },
+      };
+      
+      obj.__proto__.test = 'my name is'
+
+      let obj2 = deepClone(obj);
+
+      obj2.x = 10;
+      obj2.z.b = 5;
+      console.log(obj, obj2);
+
+      // 测试用例2:
+      let obj3 = [4, 5, 6, { name: "zgc" }];
+      let obj4 = deepClone(obj3);
+      obj3[0] = 10;
+      obj3[3].name = "wf";
+      console.log(obj3, obj4);
+
+      // 测试用例3:
+      let num1 = 10;
+      let num2 = deepClone(num1);
+      num1 = 20;
+      console.log(num1, num2);
+    </script>
+  </body>
+</html>
