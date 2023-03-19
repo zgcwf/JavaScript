@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" class="search" />
+    <button class="btn">取消</button>
+    <script>
+      // 函数防抖关注一定时间连续触发，只在最后执行一次
+
+      // 完全版:
+      // 当传入的第三个参数且为true时, 第一次调用不进行防抖处理
+      function debounce(fn, delay, immediate = false) {
+        let timer = null;
+        let isInvoke = false; // 是否调用过
+
+        const _debounce = function (...args) {
+          if (immediate && !isInvoke) {
+            fn.apply(this, args);
+            isInvoke = true;
+            return;
+          }
+
+          if (timer) clearTimeout(timer);
+
+          timer = setTimeout(() => {
+            fn.apply(this, args);
+            timer = null;
+            // 每次防抖完成后重置, 下一次不进行防抖处理
+            isInvoke = false;
+          }, delay);
+        };
+
+        // 中断函数执行
+        _debounce.cancel = function () {
+          if (timer) clearTimeout(timer);
+          timer = null;
+        };
+
+        return _debounce;
+      }
+
+      // 简写:
+      // function debounce(fn, delay) {
+      //   let timer = null;
+      //   const _debounce = function (...args) {
+      //     if (timer) clearTimeout(timer);
+      //     timer = setTimeout(() => {
+      //       fn.apply(this, args);
+      //       timer = null;
+      //     }, delay);
+      //   };
+      //   return _debounce;
+      // }
+
+      // clearTimeout(timer)清除了timer指向的定时器
+      // timer=null，是修改timer的指向，是timer这个变量不再指向某个定时器，然而并没有清除这个定时器，定时器依旧可以使用
+    </script>
+
+    <script>
+      // 1. 获取输入框
+      var search = document.querySelector(".search");
+
+      // 2. 定义一个监听函数
+      const searchChange = function (name, e) {
+        console.log(this, e.target.value, name);
+      };
+
+      // 3. 对searchChange处理
+      var _searchChange = debounce(searchChange, 3000, true);
+
+      // 4. 绑定oninput
+      // search.addEventListener("input", searchChange); // 没有进行防抖处理时, this默认绑定的是类名为search的input框
+      // search.oninput = _searchChange;
+      // search.addEventListener("input", _searchChange); // 防抖函数的返回值也是一个this指向类名为search的input框的函数
+
+      // 5. 传递多个参数
+      // 使用call:
+      search.oninput = function (e) {
+        _searchChange.call(this, "zgc", e);
+      };
+      // 使用bind:
+      // 使用bind时, e默认放在最后一个参数
+      // search.addEventListener("input", _searchChange.bind(search, "zgc"));
+
+      // 6. 中断防抖函数, 取消执行
+      // 当函数在防抖进行中时, 用户点击了取消按钮或者离开了当前网页, 那么当前函数就不必再继续计时下去了
+      var btn = document.querySelector(".btn");
+      btn.onclick = _searchChange.cancel;
+    </script>
+  </body>
+</html>

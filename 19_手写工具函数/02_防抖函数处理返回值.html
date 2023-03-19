@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" class="search" />
+
+    <script>
+      function debounce(fn, delay, immediate = false) {
+        let timer = null;
+        let isInvoke = false; // 是否调用过
+        let res = undefined;
+
+        const _debounce = function (...args) {
+          return new Promise((resolve, reject) => {
+            try {
+              if (immediate && !isInvoke) {
+                res = fn.apply(this, args);
+                resolve(res);
+                isInvoke = true;
+                return;
+              }
+
+              if (timer) clearTimeout(timer);
+
+              timer = setTimeout(() => {
+                res = fn.apply(this, args);
+                resolve(res);
+                timer = null;
+                // 每次防抖完成后重置, 下一次不进行防抖处理
+                isInvoke = false;
+              }, delay);
+            } catch (error) {
+              reject(error);
+            }
+          });
+        };
+
+        // 中断函数执行
+        _debounce.cancel = function () {
+          if (timer) clearTimeout(timer);
+          timer = null;
+        };
+
+        return _debounce;
+      }
+
+      // 1. 获取输入框
+      var search = document.querySelector(".search");
+
+      // 2. 定义一个有返回值的监听函数
+      const searchChange = function (name, e) {
+        console.log(this, e.target.value, name);
+        return e.target.value;
+      };
+
+      // 3. 对searchChange处理
+      var _searchChange = debounce(searchChange, 3000, true);
+
+      search.oninput = async function (e) {
+        try {
+          const res = await _searchChange.call(this, "zgc", e);
+          console.log("res", res);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    </script>
+  </body>
+</html>
