@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. fetch的基本使用
+      fetch("http://jsonplaceholder.typicode.com/posts?userId=5")
+        .then((res) => {
+          console.log(res); // 返回的响应信息
+          // text/json()方法属于fetchApi的一部分，它返回一个Promise实例对象 ,再用.then()才可以获取需要数据
+          return res.json();
+        })
+        .then((data) => {
+          // 注意这里data得到的才是最终数据
+          console.log("data", data);
+        })
+        .catch((err) => {});
+
+      // 2. POST请求 & 搭配await
+      const params = {
+        name: "zgc",
+        age: 18,
+      };
+
+      async function getData() {
+        const res = await fetch("http://jsonplaceholder.typicode.com/posts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(params),
+        });
+        const data = await res.json();
+        console.log("data", data);
+      }
+      
+      // async function getData() {
+      //   const res = await fetch("http://jsonplaceholder.typicode.com/posts", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/x-www-form-urlencoded",
+      //     },
+      //     body: "name=zgc&age=18",
+      //   });
+      //   const data = await res.json();
+      //   console.log("data", data);
+      // }
+      getData();
+    </script>
+  </body>
+</html>

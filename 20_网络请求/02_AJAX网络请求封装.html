@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function ajax({
+        url,
+        method = "GET",
+        data = {},
+        params,
+        timeout = 10000,
+        success,
+        failure,
+      } = {}) {
+        const xhr = new XMLHttpRequest();
+
+        const promise = new Promise((resolve, reject) => {
+          xhr.responseType = "json";
+          xhr.timeout = timeout;
+          // xhr.onabort = function () {
+          //   console.log("abort");
+          // };
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status >= 200 && xhr.status < 300) {
+                // success && success(xhr.response); // 回调函数方法得到结果
+                resolve(xhr.response);
+              } else {
+                // failure && failure({ status: xhr.status, message: xhr.statusText }); // 回调函数方法得到结果
+                reject({ status: xhr.status, message: xhr.statusText });
+              }
+            }
+          };
+
+          if (method.toUpperCase() === "GET") {
+            if (params) {
+              // 当传入params类型参数时, 将其拼接成query参数
+              const queryArr = [];
+              for (const key in params) {
+                queryArr.push(`${key}=${params[key]}`);
+              }
+              url = url + "?" + queryArr.join("&");
+            }
+            // console.log("url", url);
+            xhr.open(method, url);
+            xhr.send();
+          }
+
+          if (method.toUpperCase() === "POST") {
+            xhr.open(method, url);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.send(JSON.stringify(data));
+          }
+        });
+
+        // 可以将xhr对象返回给外界进行操作, 如终止(abort)请求等
+        promise.xhr = xhr;
+        return promise;
+      }
+
+      const result = ajax({
+        // get请求:
+        method: "GET",
+        // url: "http://jsonplaceholder.typicode.com/posts?userId=5", // query参数
+        url: "http://jsonplaceholder.typicode.com/posts", // params参数
+        params: {
+          userId: 5,
+        },
+        timeout: 10000,
+        // post请求:
+        // method: "POST",
+        // url: "http://jsonplaceholder.typicode.com/posts", // 得到一个id
+        // data: {
+        //   name: "wf",
+        //   age: 18,
+        // },
+
+        // 成功或者失败的回调, 在不使用Promise的情况下得到结果
+        // success: function (data) {
+        //   console.log("data", data);
+        // },
+        // failure: function (err) {
+        //   console.log("err", err);
+        // },
+      });
+
+      result
+        .then((res) => {
+          console.log("res", res);
+        })
+        .catch((err) => {
+          console.log("err", err); // {status: 404, message: 'Not Found'}
+        });
+
+      // 终止请求执行
+      // result.xhr.abort();
+    </script>
+  </body>
+</html>
